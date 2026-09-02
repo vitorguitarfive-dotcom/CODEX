@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL('https://denkor-intelligence.vitor-guitarfive.chatgpt.site'),
   title: {
     default: 'Denkor — Intelligence for Business',
     template: '%s — Denkor',
