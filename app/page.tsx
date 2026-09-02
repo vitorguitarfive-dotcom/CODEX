@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check, Target } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check } from 'lucide-react';
+import { AIDiagnostic } from '@/components/ai-diagnostic';
 import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
 
 const products = [
@@ -173,7 +175,13 @@ export default function Home() {
       <section className="bg-[#f3f0e7]">
         <div className="mx-auto grid max-w-[1440px] px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1fr] lg:px-12 lg:py-28">
           <div className="relative min-h-[440px] overflow-hidden bg-[#202823]">
-            <img src="/team-meeting.jpg" alt="Líder e equipe analisando resultados em um ambiente corporativo" className="absolute inset-0 h-full w-full object-cover opacity-75 mix-blend-luminosity" loading="lazy" />
+            <Image
+              src="/team-meeting.jpg"
+              alt="Líder e equipe analisando resultados em um ambiente corporativo"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover opacity-75 mix-blend-luminosity"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-[#101412]/80 via-transparent to-transparent" />
             <span className="absolute bottom-5 left-5 text-[10px] uppercase tracking-[0.16em] text-white/50">Foto: Pavel Danilyuk / Pexels</span>
           </div>
@@ -197,17 +205,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-12 lg:py-28">
-          <div>
-            <Target className="size-9 text-[#536351]" strokeWidth={1.5} aria-hidden="true" />
-            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#536351]">A pergunta certa</p>
-          </div>
-          <blockquote className="text-[clamp(2.3rem,4.8vw,5rem)] font-semibold leading-[1] tracking-[-0.055em] text-[#101412]">
-            “Onde a inteligência artificial pode gerar resultado real?”
-          </blockquote>
-        </div>
-      </section>
+      <AIDiagnostic />
 
       <ClosingCta />
       <SiteFooter />
