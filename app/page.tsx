@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check } from 'lucide-react';
 import { AIDiagnostic } from '@/components/ai-diagnostic';
 import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
 
@@ -34,6 +34,8 @@ const products = [
   },
 ];
 
+const heroSteps = ['Entender o processo', 'Identificar a oportunidade', 'Desenhar a solução', 'Medir o resultado'];
+
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
@@ -41,16 +43,16 @@ export default function Home() {
 
       <section className="relative isolate bg-[#101412] text-white">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.055)_1px,transparent_1px)] bg-[size:68px_68px] [mask-image:linear-gradient(to_bottom,black,transparent_92%)]" />
-        <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,.8fr)] lg:px-12">
-          <div className="flex flex-col justify-center py-20 lg:border-r lg:border-white/10 lg:py-24 lg:pr-16">
+        <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,.8fr)] lg:px-12">
+          <div className="flex flex-col justify-center py-16 sm:py-20 lg:border-r lg:border-white/10 lg:py-24 lg:pr-16">
             <SectionLabel dark>Intelligence for Business</SectionLabel>
-            <h1 className="mt-8 max-w-5xl text-[clamp(3.15rem,7.2vw,7.6rem)] font-semibold leading-[0.9] tracking-[-0.065em]">
+            <h1 className="mt-7 max-w-5xl text-[clamp(2.85rem,12vw,7.6rem)] font-semibold leading-[0.9] tracking-[-0.065em] sm:mt-8">
               Inteligência que transforma negócios.
             </h1>
-            <p className="mt-9 max-w-2xl text-lg leading-8 text-white/65 sm:text-xl">
+            <p className="mt-7 max-w-2xl text-base leading-7 text-white/65 sm:mt-9 sm:text-xl sm:leading-8">
               A Denkor prepara profissionais e empresas para aplicar inteligência artificial em processos, decisões e crescimento.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
               <Link href="/profissionais" className="group inline-flex min-h-14 items-center justify-between gap-6 bg-lime-300 px-5 font-semibold text-[#101412] transition-colors hover:bg-lime-200">
                 Quero me tornar especialista
                 <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
@@ -60,9 +62,13 @@ export default function Home() {
                 <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
               </Link>
             </div>
+            <Link href="#diagnostico" className="group mt-6 inline-flex max-w-max items-center gap-3 border-b border-lime-300/35 pb-2 text-sm text-white/65 transition-colors hover:border-lime-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300">
+              <span><strong className="font-semibold text-lime-300">Está em dúvida?</strong> Faça o diagnóstico de 1 minuto</span>
+              <ArrowDown className="size-4 text-lime-300 transition-transform group-hover:translate-y-1" aria-hidden="true" />
+            </Link>
           </div>
 
-          <div className="flex flex-col justify-end border-t border-white/10 py-12 lg:border-t-0 lg:py-16 lg:pl-12">
+          <div className="hidden flex-col justify-end border-t border-white/10 py-10 sm:py-12 lg:flex lg:border-t-0 lg:py-16 lg:pl-12">
             <div className="mb-auto hidden justify-end lg:flex">
               <span className="text-right text-[11px] uppercase leading-5 tracking-[0.2em] text-white/35">
                 Educação executiva
@@ -74,7 +80,7 @@ export default function Home() {
               <div className="absolute -left-4 top-0 h-full w-px bg-gradient-to-b from-lime-300 via-lime-300/30 to-transparent" />
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">Da oportunidade ao impacto</p>
               <div className="mt-7 space-y-1">
-                {['Entender o processo', 'Identificar a oportunidade', 'Desenhar a solução', 'Medir o resultado'].map((step, index) => (
+                {heroSteps.map((step, index) => (
                   <div key={step} className="group flex items-center gap-5 border-b border-white/10 py-4 text-white/70 transition-colors hover:text-white">
                     <span className="font-mono text-xs text-lime-300">0{index + 1}</span>
                     <span className="text-base">{step}</span>
@@ -83,6 +89,20 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <AIDiagnostic />
+
+      <section className="bg-[#101412] px-5 py-12 text-white lg:hidden">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-lime-300">Da oportunidade ao impacto</p>
+        <div className="mt-6 border-t border-white/15">
+          {heroSteps.map((step, index) => (
+            <div key={step} className="flex min-h-14 items-center gap-5 border-b border-white/15 py-4 text-sm text-white/70">
+              <span className="font-mono text-xs text-lime-300">0{index + 1}</span>
+              <span>{step}</span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -197,8 +217,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <AIDiagnostic />
 
       <ClosingCta />
       <SiteFooter />
