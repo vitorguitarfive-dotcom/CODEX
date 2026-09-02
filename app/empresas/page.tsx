@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Check, Clock3, Map, Network, PackageCheck, Search } from 'lucide-react';
 import { ClosingCta, InnerHero, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
@@ -115,13 +114,7 @@ export default function EmpresasPage() {
       </section>
 
       <section className="relative min-h-[560px] overflow-hidden bg-[#101412] text-white">
-        <Image
-          src="/executive-workshop.jpg"
-          alt="Profissionais participando de um workshop corporativo"
-          fill
-          sizes="100vw"
-          className="object-cover opacity-35 mix-blend-luminosity"
-        />
+        <img src="/executive-workshop.jpg" alt="Profissionais participando de um workshop corporativo" className="absolute inset-0 h-full w-full object-cover opacity-35 mix-blend-luminosity" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#101412] via-[#101412]/80 to-[#101412]/35" />
         <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] items-end px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
           <div className="max-w-3xl">

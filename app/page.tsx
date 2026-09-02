@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check } from 'lucide-react';
 import { AIDiagnostic } from '@/components/ai-diagnostic';
 import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
@@ -175,13 +174,7 @@ export default function Home() {
       <section className="bg-[#f3f0e7]">
         <div className="mx-auto grid max-w-[1440px] px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1fr] lg:px-12 lg:py-28">
           <div className="relative min-h-[440px] overflow-hidden bg-[#202823]">
-            <Image
-              src="/team-meeting.jpg"
-              alt="Líder e equipe analisando resultados em um ambiente corporativo"
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover opacity-75 mix-blend-luminosity"
-            />
+            <img src="/team-meeting.jpg" alt="Líder e equipe analisando resultados em um ambiente corporativo" className="absolute inset-0 h-full w-full object-cover opacity-75 mix-blend-luminosity" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#101412]/80 via-transparent to-transparent" />
             <span className="absolute bottom-5 left-5 text-[10px] uppercase tracking-[0.16em] text-white/50">Foto: Pavel Danilyuk / Pexels</span>
           </div>
