@@ -35,7 +35,7 @@ export default function ContatoPage() {
               <div className="mt-9">
                 <WhatsAppButton
                   contextKey="contato_profissional"
-                  ctaId="contato-profissional"
+                  ctaId="cta-final-contato-profissional"
                   position="contato"
                   className="bg-[#101412] text-white hover:bg-[#344039] focus-visible:outline-[#769149]"
                 >
@@ -56,7 +56,7 @@ export default function ContatoPage() {
               <div className="mt-9">
                 <WhatsAppButton
                   contextKey="contato_empresa"
-                  ctaId="contato-empresa"
+                  ctaId="cta-final-contato-empresa"
                   position="contato"
                   microcopyTone="dark"
                 >

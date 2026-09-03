@@ -120,7 +120,12 @@ export default function ProfissionaisPage() {
         </div>
       </section>
 
-      <ClosingCta />
+      <ClosingCta
+        title="Encontre a formação certa para o seu momento."
+        label="Encontrar minha formação no WhatsApp"
+        contextKey="profissionais_cta_final"
+        ctaId="cta-final-profissionais"
+      />
       <SiteFooter />
     </main>
   );

@@ -136,7 +136,12 @@ export default function EmpresasPage() {
         </div>
       </section>
 
-      <ClosingCta />
+      <ClosingCta
+        title="Descubra onde a IA pode gerar resultado na sua operação."
+        label="Agendar diagnóstico da empresa"
+        contextKey="empresas_cta_final"
+        ctaId="cta-final-empresas"
+      />
       <SiteFooter />
     </main>
   );

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { ArrowRight, Menu } from 'lucide-react';
 import { WhatsAppButton } from '@/components/whatsapp';
 import type { WhatsAppContextKey } from '@/lib/whatsapp';
 
@@ -154,11 +154,13 @@ export function ClosingCta({
   label = 'Conversar com a Denkor',
   contextKey = 'home_cta_final',
   ctaId = 'cta-final-home',
+  href,
 }: {
   title?: string;
   label?: string;
   contextKey?: WhatsAppContextKey;
   ctaId?: string;
+  href?: string;
 }) {
   return (
     <section className="bg-lime-300 text-[#101412]">
@@ -169,9 +171,20 @@ export function ClosingCta({
             {title}
           </h2>
         </div>
-        <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final" variant="secondary">
-          {label}
-        </WhatsAppButton>
+        {href ? (
+          <Link
+            href={href}
+            id={ctaId}
+            className="group inline-flex min-h-14 items-center justify-between gap-8 border border-[#101412]/35 px-5 font-semibold transition-colors hover:bg-[#101412] hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]"
+          >
+            {label}
+            <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+          </Link>
+        ) : (
+          <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final" variant="secondary">
+            {label}
+          </WhatsAppButton>
+        )}
       </div>
     </section>
   );

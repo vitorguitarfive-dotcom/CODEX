@@ -4,34 +4,22 @@ import { AIDiagnostic } from '@/components/ai-diagnostic';
 import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
 import { WhatsAppButton } from '@/components/whatsapp';
 
-const products = [
+const productJourneys = [
   {
-    number: '01',
     audience: 'Para profissionais',
-    title: 'Especialista em IA para Negócios',
-    text: 'Aprenda a identificar onde a IA pode gerar resultado e transformar oportunidades em agentes, automações e melhoria de processos.',
     href: '/profissionais#especialista',
+    products: [
+      { title: 'Especialista em IA para Negócios', href: '/profissionais#especialista' },
+      { title: 'Consultor de IA para Empresas', href: '/profissionais#consultor' },
+    ],
   },
   {
-    number: '02',
-    audience: 'Para profissionais',
-    title: 'Consultor de IA para Empresas',
-    text: 'Construa uma operação para prospectar, diagnosticar, vender e entregar projetos de inteligência artificial.',
-    href: '/profissionais#consultor',
-  },
-  {
-    number: '03',
     audience: 'Para empresas',
-    title: 'AI Transformation Day',
-    text: 'Um dia para educar líderes, analisar processos e mapear oportunidades reais de aplicação de IA.',
     href: '/empresas#transformation-day',
-  },
-  {
-    number: '04',
-    audience: 'Para empresas',
-    title: 'AI Champions',
-    text: 'Forme referências internas capazes de identificar e conduzir oportunidades de IA em cada departamento.',
-    href: '/empresas#ai-champions',
+    products: [
+      { title: 'AI Transformation Day', href: '/empresas#transformation-day' },
+      { title: 'AI Champions', href: '/empresas#ai-champions' },
+    ],
   },
 ];
 
@@ -181,22 +169,35 @@ export default function Home() {
             <p className="max-w-sm text-sm leading-6 text-white/50">Formação para quem aplica e comercializa. Transformação para quem quer avançar como empresa.</p>
           </div>
           <div className="grid md:grid-cols-2">
-            {products.map((product, index) => (
-              <Link
-                key={product.title}
-                href={product.href}
-                className={`group relative min-h-[390px] border-b border-white/15 py-10 transition-colors hover:bg-white/[0.035] md:px-9 ${index % 2 === 0 ? 'md:border-r' : ''}`}
-              >
-                <div className="flex items-start justify-between">
-                  <span className="font-mono text-xs text-lime-300">{product.number}</span>
-                  <ArrowUpRight className="size-5 text-white/35 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-lime-300" aria-hidden="true" />
+            {productJourneys.map((journey, journeyIndex) => (
+              <article key={journey.audience} className={`border-b border-white/15 py-10 md:px-9 ${journeyIndex === 0 ? 'md:border-r' : ''}`}>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-lime-300">{journey.audience}</p>
+                  <span className="font-mono text-xs text-white/35">0{journeyIndex + 1}</span>
                 </div>
-                <div className="mt-24">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/35">{product.audience}</p>
-                  <h3 className="mt-4 max-w-lg text-3xl font-semibold leading-tight tracking-[-0.035em]">{product.title}</h3>
-                  <p className="mt-5 max-w-xl text-sm leading-6 text-white/50">{product.text}</p>
+                <div className="mt-16 flex items-center gap-4 text-sm text-white/45" aria-label={`${journey.products[0].title}, depois ${journey.products[1].title}`}>
+                  <span>{journey.products[0].title.split(' em ')[0]}</span>
+                  <ArrowRight className="size-4 shrink-0 text-lime-300" aria-hidden="true" />
+                  <span>{journey.products[1].title}</span>
                 </div>
-              </Link>
+                <div className="mt-7 border-t border-white/15">
+                  {journey.products.map((product, productIndex) => (
+                    <Link
+                      key={product.title}
+                      href={product.href}
+                      className="group flex min-h-24 items-center gap-5 border-b border-white/15 py-5 text-white/75 transition-colors hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-[-3px] focus-visible:outline-[#dff57a]"
+                    >
+                      <span className="font-mono text-xs text-lime-300">0{productIndex + 1}</span>
+                      <span className="text-lg font-semibold">{product.title}</span>
+                      <ArrowUpRight className="ml-auto size-5 shrink-0 text-white/35 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-lime-300" aria-hidden="true" />
+                    </Link>
+                  ))}
+                </div>
+                <Link href={journey.href} className="mt-7 inline-flex items-center gap-3 text-sm font-semibold text-white/65 underline decoration-white/25 underline-offset-4 hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]">
+                  Ver a jornada completa
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </article>
             ))}
           </div>
         </div>
@@ -229,7 +230,12 @@ export default function Home() {
         </div>
       </section>
 
-      <ClosingCta />
+      <ClosingCta
+        title="Descubra qual caminho faz sentido para você."
+        label="Descobrir meu caminho"
+        ctaId="cta-final-home"
+        href="#diagnostico"
+      />
       <SiteFooter />
     </main>
   );

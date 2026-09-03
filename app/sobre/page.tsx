@@ -114,7 +114,12 @@ export default function SobrePage() {
         </div>
       </section>
 
-      <ClosingCta />
+      <ClosingCta
+        title="Conecte IA à realidade do seu negócio."
+        label="Conversar sobre a abordagem Denkor"
+        contextKey="sobre_cta_final"
+        ctaId="cta-final-sobre"
+      />
       <SiteFooter />
     </main>
   );
