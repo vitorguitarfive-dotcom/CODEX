@@ -58,7 +58,6 @@ export default function ContatoPage() {
                   contextKey="contato_empresa"
                   ctaId="cta-final-contato-empresa"
                   position="contato"
-                  microcopyTone="dark"
                 >
                   Falar sobre minha empresa
                 </WhatsAppButton>

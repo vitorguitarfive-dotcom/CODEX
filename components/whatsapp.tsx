@@ -23,7 +23,6 @@ type WhatsAppButtonProps = {
   variant?: 'primary' | 'secondary';
   extra?: Omit<WhatsAppLinkExtra, 'utm'>;
   className?: string;
-  microcopyTone?: 'light' | 'dark';
 };
 
 export function WhatsAppButton({
@@ -34,7 +33,6 @@ export function WhatsAppButton({
   variant = 'primary',
   extra,
   className,
-  microcopyTone = 'light',
 }: WhatsAppButtonProps) {
   const [utm, setUtm] = useState<UtmData>(emptyUtm);
 
@@ -50,28 +48,23 @@ export function WhatsAppButton({
   };
 
   return (
-    <span className="inline-flex max-w-full flex-col items-start gap-1.5">
-      <a
-        id={ctaId}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={handleClick}
-        className={cn(
-          'group inline-flex min-h-14 max-w-full items-center justify-between gap-6 px-5 text-left font-semibold transition-[background-color,color,border-color,transform] duration-150 focus-visible:outline-[3px] focus-visible:outline-offset-2',
-          variant === 'primary'
-            ? 'bg-[#dff57a] text-[#101412] hover:bg-white focus-visible:outline-[#dff57a]'
-            : 'border border-current text-current hover:bg-[#101412] hover:text-white focus-visible:outline-[#769149]',
-          className,
-        )}
-      >
-        <span>{children}</span>
-        <ArrowUpRight className="size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-      </a>
-      <span className={cn('text-[13px] leading-[18px]', microcopyTone === 'dark' ? 'text-white/65' : 'text-[#526057]')}>
-        Abre o WhatsApp
-      </span>
-    </span>
+    <a
+      id={ctaId}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={handleClick}
+      className={cn(
+        'group inline-flex min-h-14 max-w-full items-center justify-between gap-6 px-5 text-left font-semibold transition-[background-color,color,border-color,transform] duration-150 focus-visible:outline-[3px] focus-visible:outline-offset-2',
+        variant === 'primary'
+          ? 'bg-[#dff57a] text-[#101412] hover:bg-white focus-visible:outline-[#dff57a]'
+          : 'border border-current text-current hover:bg-[#101412] hover:text-white focus-visible:outline-[#769149]',
+        className,
+      )}
+    >
+      <span>{children}</span>
+      <ArrowUpRight className="size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+    </a>
   );
 }
 

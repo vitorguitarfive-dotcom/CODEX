@@ -247,7 +247,6 @@ function DiagnosticResultView({
             ctaId="diagnostico-resultado"
             position="diagnostico-resultado"
             extra={{ resultado: result.title }}
-            microcopyTone="dark"
           >
             Falar com a Denkor sobre isso
           </WhatsAppButton>

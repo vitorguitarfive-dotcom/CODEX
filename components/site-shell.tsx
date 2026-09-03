@@ -49,7 +49,6 @@ export function SiteHeader() {
             ctaId="header-whatsapp"
             position="header"
             className="min-h-10 px-4 text-sm"
-            microcopyTone="dark"
           >
             Falar no WhatsApp
           </WhatsAppButton>
@@ -74,7 +73,6 @@ export function SiteHeader() {
                 ctaId="header-whatsapp-mobile"
                 position="menu-mobile"
                 className="w-full text-sm"
-                microcopyTone="dark"
               >
                 Falar no WhatsApp
               </WhatsAppButton>
@@ -121,7 +119,6 @@ export function SiteFooter({
               position="footer"
               variant="secondary"
               className="w-full border-white/30 text-white hover:bg-white hover:text-[#101412] focus-visible:outline-[#dff57a]"
-              microcopyTone="dark"
             >
               Conversar no WhatsApp
             </WhatsAppButton>
@@ -187,7 +184,7 @@ export function ClosingCta({
             <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </Link>
         ) : (
-          <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final" microcopyTone="dark">
+          <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final">
             {label}
           </WhatsAppButton>
         )}
@@ -222,7 +219,6 @@ export function InnerHero({
                 contextKey={whatsapp.contextKey}
                 ctaId={whatsapp.ctaId}
                 position="hero"
-                microcopyTone="dark"
               >
                 {whatsapp.label}
               </WhatsAppButton>

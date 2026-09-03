@@ -42,7 +42,6 @@ export default function Home() {
                 contextKey="home_hero_profissional"
                 ctaId="hero-profissional"
                 position="hero"
-                microcopyTone="dark"
               >
                 Quero me tornar especialista
               </WhatsAppButton>
@@ -52,7 +51,6 @@ export default function Home() {
                 position="hero"
                 variant="secondary"
                 className="border-white/30 text-white hover:bg-white hover:text-[#101412] focus-visible:outline-[#dff57a]"
-                microcopyTone="dark"
               >
                 Quero levar IA para minha empresa
               </WhatsAppButton>
