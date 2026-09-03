@@ -15,7 +15,7 @@ export type DiagnosticQuestion = {
 
 export type DiagnosticResultId =
   | 'business-ai-specialist'
-  | 'ai-consulting'
+  | 'ai-consultant'
   | 'ai-transformation-day'
   | 'ai-champions';
 
@@ -23,7 +23,6 @@ export type DiagnosticResult = {
   id: DiagnosticResultId;
   title: string;
   text: string;
-  ctaLabel: string;
   href: string;
   steps?: string[];
 };
@@ -73,18 +72,6 @@ export const diagnosticQuestions: Record<DiagnosticProfile, DiagnosticQuestion[]
       ],
     },
     {
-      id: 'company-opportunity',
-      prompt: 'Onde você enxerga maior oportunidade hoje?',
-      options: [
-        { id: 'sales', label: 'Comercial e vendas' },
-        { id: 'marketing', label: 'Marketing' },
-        { id: 'service', label: 'Atendimento' },
-        { id: 'operations', label: 'Operações e processos internos' },
-        { id: 'management', label: 'Gestão e tomada de decisão' },
-        { id: 'unknown', label: 'Ainda não sabemos' },
-      ],
-    },
-    {
       id: 'company-challenge',
       prompt: 'Qual é o principal desafio?',
       options: [
@@ -113,29 +100,25 @@ export const diagnosticResults: Record<DiagnosticResultId, DiagnosticResult> = {
     id: 'business-ai-specialist',
     title: 'Especialista em IA para Negócios',
     text: 'Seu momento indica que o caminho mais adequado é desenvolver capacidade prática para identificar oportunidades, estruturar soluções e aplicar inteligência artificial em negócios.',
-    ctaLabel: 'Conhecer Especialista em IA para Negócios',
     href: '/profissionais#especialista',
   },
-  'ai-consulting': {
-    id: 'ai-consulting',
-    title: 'Consultoria de IA para Empresas',
-    text: 'Há potencial para aplicação de IA na sua operação, mas o primeiro passo é identificar os processos certos antes de escolher ferramentas.',
-    ctaLabel: 'Conhecer Consultoria de IA',
-    href: '/contato#formulario',
-    steps: ['Entender o processo', 'Identificar oportunidades', 'Desenhar a solução', 'Medir o resultado'],
+  'ai-consultant': {
+    id: 'ai-consultant',
+    title: 'Consultor de IA para Empresas',
+    text: 'Seu objetivo pede uma formação que conecte prospecção, diagnóstico, proposta e entrega para transformar conhecimento em uma atuação profissional.',
+    href: '/profissionais#consultor',
+    steps: ['Definir posicionamento', 'Encontrar empresas', 'Diagnosticar oportunidades', 'Vender e entregar'],
   },
   'ai-transformation-day': {
     id: 'ai-transformation-day',
     title: 'AI Transformation Day',
     text: 'Antes de implementar, sua equipe precisa desenvolver repertório para reconhecer onde a inteligência artificial pode gerar impacto real.',
-    ctaLabel: 'Conhecer AI Transformation Day',
     href: '/empresas#transformation-day',
   },
   'ai-champions': {
     id: 'ai-champions',
     title: 'AI Champions',
     text: 'O próximo passo mais estratégico é desenvolver pessoas dentro da organização capazes de identificar oportunidades e liderar iniciativas de inteligência artificial.',
-    ctaLabel: 'Conhecer AI Champions',
     href: '/empresas#ai-champions',
   },
 };
@@ -152,6 +135,12 @@ export const diagnosticRules: Record<DiagnosticProfile, DiagnosticRule[]> = {
       matches: (answers) =>
         answers['professional-goal'] === 'lead-inside-company' ||
         answers['professional-direction'] === 'lead-transformation',
+    },
+    {
+      result: 'ai-consultant',
+      matches: (answers) =>
+        answers['professional-goal'] === 'provide-services' ||
+        answers['professional-direction'] === 'new-professional-skill',
     },
     {
       result: 'business-ai-specialist',
@@ -171,14 +160,11 @@ export const diagnosticRules: Record<DiagnosticProfile, DiagnosticRule[]> = {
         answers['company-challenge'] === 'train-team' ||
         answers['company-next-step'] === 'team-immersion',
     },
-    {
-      result: 'ai-consulting',
-      matches: () => true,
-    },
+    { result: 'ai-transformation-day', matches: () => true },
   ],
 };
 
 export function getDiagnosticResult(profile: DiagnosticProfile, answers: DiagnosticAnswerMap) {
   const matchedRule = diagnosticRules[profile].find((rule) => rule.matches(answers));
-  return diagnosticResults[matchedRule?.result ?? 'ai-consulting'];
+  return diagnosticResults[matchedRule?.result ?? 'ai-transformation-day'];
 }

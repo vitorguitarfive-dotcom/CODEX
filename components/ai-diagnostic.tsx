@@ -44,7 +44,7 @@ function DiagnosticStart({ onSelect }: { onSelect: (profile: DiagnosticProfile) 
         <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-8 gap-y-2 px-5 py-4 sm:px-8 lg:px-12">
           <p className="text-xs font-semibold uppercase tracking-[0.2em]">Diagnóstico interativo Denkor</p>
           <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[#344039] sm:gap-5">
-            <span>3–4 perguntas</span>
+            <span>3 perguntas</span>
             <span className="h-3 w-px bg-[#101412]/25" aria-hidden="true" />
             <span>Cerca de 1 minuto</span>
           </div>
@@ -133,6 +133,11 @@ function DiagnosticQuestionView({
 }) {
   const questions = diagnosticQuestions[profile];
   const question = questions[step];
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    headingRef.current?.focus({ preventScroll: true });
+  }, [profile, step]);
 
   return (
     <div className="mx-auto min-h-[100svh] max-w-[1440px] px-5 py-10 sm:px-8 sm:py-14 lg:min-h-[720px] lg:grid lg:grid-cols-[.62fr_1.38fr] lg:gap-16 lg:px-12 lg:py-24">
@@ -152,31 +157,44 @@ function DiagnosticQuestionView({
 
       <div key={`${profile}-${step}`} className="diagnostic-enter pt-8 lg:pt-0">
         <p className="font-mono text-xs text-white/35">PERGUNTA {String(step + 1).padStart(2, '0')} · ESCOLHA UMA RESPOSTA</p>
-        <h3 className="mt-5 max-w-4xl text-[clamp(1.95rem,8.5vw,4.8rem)] font-semibold leading-[1] tracking-[-0.05em] text-white sm:mt-6">
+        <h3
+          id={`diagnostic-question-${profile}-${step}`}
+          ref={headingRef}
+          tabIndex={-1}
+          className="mt-5 max-w-4xl text-[clamp(1.95rem,8.5vw,4.8rem)] font-semibold leading-[1] tracking-[-0.05em] text-white outline-none sm:mt-6"
+        >
           {question.prompt}
         </h3>
-        <div className="mt-8 border-t border-white/15 sm:mt-10">
+        <div
+          role="radiogroup"
+          aria-labelledby={`diagnostic-question-${profile}-${step}`}
+          className="mt-8 border-t border-white/15 sm:mt-10"
+        >
           {question.options.map((option, optionIndex) => {
             const isSelected = selectedOption === option.id;
             return (
-              <Button
+              <label
                 key={option.id}
-                type="button"
-                variant="ghost"
-                disabled={selectedOption !== null}
-                aria-pressed={isSelected}
-                onClick={() => onAnswer(option.id)}
-                className={`group relative h-auto min-h-16 w-full justify-start rounded-none border-b border-white/15 px-0 py-4 text-left text-[15px] whitespace-normal transition-colors duration-300 focus-visible:border-white/15 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-lime-300/80 sm:min-h-20 sm:px-4 sm:py-5 sm:text-base ${
+                className={`group relative flex min-h-16 w-full cursor-pointer items-center border-b border-white/15 px-0 py-4 text-left text-[15px] transition-colors duration-300 has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-offset-[-3px] has-[:focus-visible]:outline-[#dff57a] sm:min-h-20 sm:px-4 sm:py-5 sm:text-base ${
                   isSelected ? 'bg-lime-300 text-[#101412]' : 'text-white/65 hover:bg-white/[0.045] hover:text-white'
                 }`}
               >
+                <input
+                  type="radio"
+                  name={question.id}
+                  value={option.id}
+                  checked={isSelected}
+                  disabled={selectedOption !== null}
+                  onChange={() => onAnswer(option.id)}
+                  className="sr-only"
+                />
                 <span className={`mr-5 font-mono text-xs ${isSelected ? 'text-[#101412]/60' : 'text-lime-300'}`}>
                   {String.fromCharCode(65 + optionIndex)}
                 </span>
                 <span className="pr-8 leading-6 font-normal">{option.label}</span>
-                <ArrowRight className={`ml-auto size-4 shrink-0 transition-transform duration-300 group-hover/button:translate-x-1 ${isSelected ? 'text-[#101412]' : 'text-white/25'}`} aria-hidden="true" />
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-lime-300 transition-[width] duration-300 group-hover/button:w-full group-focus-visible/button:w-full" />
-              </Button>
+                <ArrowRight className={`ml-auto size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 ${isSelected ? 'text-[#101412]' : 'text-white/25'}`} aria-hidden="true" />
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-lime-300 transition-[width] duration-300 group-hover:w-full" />
+              </label>
             );
           })}
         </div>
@@ -270,7 +288,6 @@ export function AIDiagnostic() {
   useEffect(() => {
     if (view === 'start' || !experienceRef.current) return;
 
-    experienceRef.current.focus({ preventScroll: true });
     experienceRef.current.scrollIntoView({
       block: 'start',
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
@@ -285,6 +302,7 @@ export function AIDiagnostic() {
     setView('questions');
     trackDiagnosticEvent('diagnostic_started', { profile: selectedProfile });
     trackDiagnosticEvent('diagnostic_profile_selected', { profile: selectedProfile });
+    trackDiagnosticEvent('diagnostico_start', { profile: selectedProfile });
   };
 
   const answerQuestion = (optionId: string) => {
@@ -294,6 +312,12 @@ export function AIDiagnostic() {
     const nextAnswers = { ...answers, [question.id]: optionId };
     setSelectedOption(optionId);
     trackDiagnosticEvent('diagnostic_answer', {
+      profile,
+      question: question.id,
+      answer: optionId,
+      step: step + 1,
+    });
+    trackDiagnosticEvent('diagnostico_step', {
       profile,
       question: question.id,
       answer: optionId,
@@ -309,6 +333,7 @@ export function AIDiagnostic() {
         setResultId(result.id);
         setView('result');
         trackDiagnosticEvent('diagnostic_completed', { profile, result: result.id });
+        trackDiagnosticEvent('diagnostico_complete', { profile, result: result.id });
         return;
       }
 
