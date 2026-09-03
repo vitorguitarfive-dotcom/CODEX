@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ArrowUpRight, RotateCcw, Target } from 'lucide-react';
-import { type FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { type ComponentProps, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -232,7 +232,7 @@ function DiagnosticLeadDialog({
     trackDiagnosticEvent('diagnostic_lead_opened', { result: result.id, profile });
   };
 
-  const submitLead = async (event: FormEvent<HTMLFormElement>) => {
+  const submitLead: NonNullable<ComponentProps<'form'>['onSubmit']> = async (event) => {
     event.preventDefault();
     const cleanName = name.trim().replace(/\s+/g, ' ');
     const cleanWhatsapp = whatsapp.replace(/\D/g, '');

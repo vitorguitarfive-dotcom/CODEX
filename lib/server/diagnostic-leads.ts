@@ -1,9 +1,4 @@
-import { env } from 'cloudflare:workers';
-import {
-  createDiagnosticLeadsCreatedAtIndexSql,
-  createDiagnosticLeadsResultIndexSql,
-  createDiagnosticLeadsTableSql,
-} from '@/db/schema';
+import { google } from 'googleapis';
 import {
   diagnosticQuestions,
   getDiagnosticResult,
@@ -19,89 +14,97 @@ type DiagnosticLeadInput = {
   sourceUrl?: string;
 };
 
-type DiagnosticAnswerSummary = {
-  questionId: string;
-  question: string;
-  optionId: string;
-  answer: string;
-};
+type DiagnosticAnswerSummary = { question: string; answer: string };
 
-type CloudflareBindings = Cloudflare.Env & { DB?: D1Database };
+const spreadsheetHeaders = [
+  'Data e hora', 'Nome', 'WhatsApp', 'Perfil', 'Recomendação',
+  'ID da recomendação', 'Respostas do diagnóstico', 'URL de origem',
+  'UTM source', 'UTM medium', 'UTM campaign',
+];
 
-function getDatabase() {
-  const database = (env as CloudflareBindings).DB;
-  if (!database) throw new Error('D1 binding DB is unavailable');
-  return database;
+function getGoogleSheetsClient() {
+  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+
+  if (!email || !privateKey || !spreadsheetId) {
+    throw new Error('Google Sheets environment variables are not configured');
+  }
+
+  const auth = new google.auth.JWT({
+    email,
+    key: privateKey,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+
+  return { sheets: google.sheets({ version: 'v4', auth }), spreadsheetId };
 }
 
 function buildAnswerSummary(profile: DiagnosticProfile, answers: DiagnosticAnswerMap) {
   return diagnosticQuestions[profile].map<DiagnosticAnswerSummary>((question) => {
     const optionId = answers[question.id];
     const option = question.options.find((candidate) => candidate.id === optionId);
-
     if (!option) throw new Error(`Invalid answer for ${question.id}`);
-
-    return {
-      questionId: question.id,
-      question: question.prompt,
-      optionId: option.id,
-      answer: option.label,
-    };
+    return { question: question.prompt, answer: option.label };
   });
 }
 
 function getCampaignData(sourceUrl?: string) {
-  if (!sourceUrl) return { sourceUrl: null, utmSource: null, utmMedium: null, utmCampaign: null };
+  if (!sourceUrl) return { sourceUrl: '', utmSource: '', utmMedium: '', utmCampaign: '' };
 
   try {
     const url = new URL(sourceUrl);
     return {
       sourceUrl: url.toString().slice(0, 1000),
-      utmSource: url.searchParams.get('utm_source')?.slice(0, 120) ?? null,
-      utmMedium: url.searchParams.get('utm_medium')?.slice(0, 120) ?? null,
-      utmCampaign: url.searchParams.get('utm_campaign')?.slice(0, 120) ?? null,
+      utmSource: url.searchParams.get('utm_source')?.slice(0, 120) ?? '',
+      utmMedium: url.searchParams.get('utm_medium')?.slice(0, 120) ?? '',
+      utmCampaign: url.searchParams.get('utm_campaign')?.slice(0, 120) ?? '',
     };
   } catch {
-    return { sourceUrl: null, utmSource: null, utmMedium: null, utmCampaign: null };
+    return { sourceUrl: '', utmSource: '', utmMedium: '', utmCampaign: '' };
   }
 }
 
 export async function saveDiagnosticLead(input: DiagnosticLeadInput) {
-  const database = getDatabase();
+  const { sheets, spreadsheetId } = getGoogleSheetsClient();
   const answers = buildAnswerSummary(input.profile, input.answers);
   const result = getDiagnosticResult(input.profile, input.answers);
   const campaign = getCampaignData(input.sourceUrl);
-  const id = crypto.randomUUID();
-  const createdAt = new Date().toISOString();
 
-  await database.batch([
-    database.prepare(createDiagnosticLeadsTableSql),
-    database.prepare(createDiagnosticLeadsCreatedAtIndexSql),
-    database.prepare(createDiagnosticLeadsResultIndexSql),
-  ]);
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range: 'Leads!A:K',
+    valueInputOption: 'RAW',
+    insertDataOption: 'INSERT_ROWS',
+    requestBody: {
+      values: [[
+        new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+        input.name,
+        input.whatsapp,
+        input.profile === 'professional' ? 'Profissional' : 'Empresa',
+        result.title,
+        result.id,
+        answers.map(({ question, answer }) => `${question}: ${answer}`).join('\n'),
+        campaign.sourceUrl,
+        campaign.utmSource,
+        campaign.utmMedium,
+        campaign.utmCampaign,
+      ]],
+    },
+  });
 
-  await database
-    .prepare(`
-      INSERT INTO diagnostic_leads (
-        id, created_at, name, whatsapp, profile, result_id, result_title,
-        answers_json, source_url, utm_source, utm_medium, utm_campaign
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `)
-    .bind(
-      id,
-      createdAt,
-      input.name,
-      input.whatsapp,
-      input.profile,
-      result.id,
-      result.title,
-      JSON.stringify(answers),
-      campaign.sourceUrl,
-      campaign.utmSource,
-      campaign.utmMedium,
-      campaign.utmCampaign,
-    )
-    .run();
+  return { result };
+}
 
-  return { id, result };
+export async function ensureDiagnosticLeadHeaders() {
+  const { sheets, spreadsheetId } = getGoogleSheetsClient();
+  const existing = await sheets.spreadsheets.values.get({ spreadsheetId, range: 'Leads!A1:K1' });
+  if (existing.data.values?.[0]?.some(Boolean)) return;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId,
+    range: 'Leads!A1:K1',
+    valueInputOption: 'RAW',
+    requestBody: { values: [spreadsheetHeaders] },
+  });
 }

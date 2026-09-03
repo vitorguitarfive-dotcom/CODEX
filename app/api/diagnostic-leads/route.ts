@@ -1,5 +1,7 @@
-import { saveDiagnosticLead } from '@/lib/server/diagnostic-leads';
+import { ensureDiagnosticLeadHeaders, saveDiagnosticLead } from '@/lib/server/diagnostic-leads';
 import type { DiagnosticAnswerMap, DiagnosticProfile } from '@/lib/diagnostic';
+
+export const runtime = 'nodejs';
 
 type LeadRequestBody = {
   name?: unknown;
@@ -46,6 +48,7 @@ export async function POST(request: Request) {
       return Response.json({ error: 'Não foi possível identificar o diagnóstico.' }, { status: 400 });
     }
 
+    await ensureDiagnosticLeadHeaders();
     const lead = await saveDiagnosticLead({
       name,
       whatsapp,
@@ -54,7 +57,7 @@ export async function POST(request: Request) {
       sourceUrl: typeof body.sourceUrl === 'string' ? body.sourceUrl : undefined,
     });
 
-    return Response.json({ ok: true, leadId: lead.id, result: lead.result.id }, { status: 201 });
+    return Response.json({ ok: true, result: lead.result.id }, { status: 201 });
   } catch (error) {
     const isInvalidAnswer = error instanceof Error && error.message.startsWith('Invalid answer');
     if (isInvalidAnswer) {
