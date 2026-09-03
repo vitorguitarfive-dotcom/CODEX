@@ -22,8 +22,8 @@ export function ProofCases() {
         <div className="grid gap-8 border-b border-[#101412]/15 pb-12 lg:grid-cols-[.72fr_1.28fr]">
           <SectionLabel>Experiências reais</SectionLabel>
           <div>
-            <h2 className="max-w-4xl text-[clamp(2.4rem,5vw,5rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-[#101412]">
-              O que muda quando o processo vem primeiro.
+            <h2 className="max-w-4xl text-[2rem] font-semibold leading-[2.375rem] tracking-[-0.045em] text-[#101412] lg:text-[3rem] lg:leading-[3.375rem]">
+              O que acontece quando a IA sai da ferramenta e entra no processo.
             </h2>
             <p className="mt-6 max-w-2xl leading-7 text-[#526057]">
               Relatos de quem aplicou a abordagem da Denkor em contextos profissionais e empresariais.

@@ -1,6 +1,6 @@
 export const internationalPresence = {
   countries: ['Brasil', 'Estados Unidos', 'Espanha'],
-  support: 'Conhecimento aplicado a diferentes contextos de negócio, com uma mesma disciplina de processo, solução e resultado.',
+  support: 'A Denkor já atua formando profissionais e apoiando empresas na aplicação prática de inteligência artificial nesses três mercados.',
 };
 
 export const depoimentos = [

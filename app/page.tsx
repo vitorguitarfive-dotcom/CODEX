@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2 } from 'lucide-react';
 import { AIDiagnostic } from '@/components/ai-diagnostic';
 import { InternationalPresence, ProofCases } from '@/components/proof-sections';
 import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
@@ -7,12 +7,18 @@ import { WhatsAppButton } from '@/components/whatsapp';
 
 const productJourneys = [
   {
+    context: 'Na minha carreira',
+    description: 'Aprenda a aplicar IA e transforme essa capacidade em atuação profissional.',
+    progression: ['Especialista', 'Consultor'],
     products: [
       { title: 'Especialista em IA para Negócios', href: '/profissionais#especialista' },
       { title: 'Consultor de IA para Empresas', href: '/profissionais#consultor' },
     ],
   },
   {
+    context: 'Na minha empresa',
+    description: 'Descubra onde aplicar IA e desenvolva capacidade para executar.',
+    progression: ['Transformation Day', 'AI Champions'],
     products: [
       { title: 'AI Transformation Day', href: '/empresas#transformation-day' },
       { title: 'AI Champions', href: '/empresas#ai-champions' },
@@ -20,7 +26,11 @@ const productJourneys = [
   },
 ];
 
-const heroSteps = ['Entender o processo', 'Identificar a oportunidade', 'Desenhar a solução', 'Medir o resultado'];
+const denkorMethod = [
+  { label: 'Identificar', description: 'Onde existe oportunidade real de aplicar IA.' },
+  { label: 'Aplicar', description: 'Transformar a oportunidade em processo ou solução.' },
+  { label: 'Medir', description: 'Entender o impacto gerado no negócio.' },
+];
 
 export default function Home() {
   return (
@@ -71,12 +81,15 @@ export default function Home() {
             </div>
             <div className="relative">
               <div className="absolute -left-4 top-0 h-full w-px bg-lime-300" />
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">Da oportunidade ao impacto</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">Método Denkor</p>
               <div className="mt-7 space-y-1">
-                {heroSteps.map((step, index) => (
-                  <div key={step} className="group flex items-center gap-5 border-b border-white/10 py-4 text-white/70 transition-colors hover:text-white">
+                {denkorMethod.map((step, index) => (
+                  <div key={step.label} className="group flex items-start gap-5 border-b border-white/10 py-4 text-white/70 transition-colors hover:text-white">
                     <span className="font-mono text-xs text-lime-300">0{index + 1}</span>
-                    <span className="text-base">{step}</span>
+                    <div>
+                      <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white">{step.label}</p>
+                      <p className="mt-1 text-sm leading-6">{step.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -85,20 +98,23 @@ export default function Home() {
         </div>
       </section>
 
-      <AIDiagnostic />
-      <InternationalPresence />
-
       <section className="bg-[#101412] px-5 py-12 text-white lg:hidden">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-lime-300">Da oportunidade ao impacto</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-lime-300">Método Denkor</p>
         <div className="mt-6 border-t border-white/15">
-          {heroSteps.map((step, index) => (
-            <div key={step} className="flex min-h-14 items-center gap-5 border-b border-white/15 py-4 text-sm text-white/70">
+          {denkorMethod.map((step, index) => (
+            <div key={step.label} className="flex min-h-14 items-start gap-5 border-b border-white/15 py-4 text-sm text-white/70">
               <span className="font-mono text-xs text-lime-300">0{index + 1}</span>
-              <span>{step}</span>
+              <div>
+                <p className="font-semibold uppercase tracking-[0.12em] text-white">{step.label}</p>
+                <p className="mt-1 leading-6">{step.description}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
+
+      <AIDiagnostic />
+      <InternationalPresence />
 
       <section className="bg-[#f3f0e7]">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.72fr_1.28fr] lg:px-12 lg:py-32">
@@ -158,20 +174,21 @@ export default function Home() {
 
       <section className="bg-[#101412] text-white">
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-          <div className="flex flex-col gap-8 border-b border-white/15 pb-12 lg:flex-row lg:items-end lg:justify-between">
+          <div className="border-b border-white/15 pb-12">
             <div>
               <SectionLabel dark>Produtos Denkor</SectionLabel>
-              <h2 className="mt-7 max-w-3xl text-[clamp(2.8rem,5vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.055em]">Quatro caminhos. Um mesmo foco: resultado real.</h2>
+              <h2 className="mt-7 max-w-3xl text-[2rem] font-semibold leading-[2.375rem] tracking-[-0.045em] lg:text-[3rem] lg:leading-[3.375rem]">Onde você quer gerar resultado com IA?</h2>
             </div>
-            <p className="max-w-sm text-sm leading-6 text-white/50">Formação para quem aplica e comercializa. Transformação para quem quer avançar como empresa.</p>
           </div>
           <div className="grid md:grid-cols-2">
             {productJourneys.map((journey, journeyIndex) => (
               <article key={journey.products[0].title} className={`border-b border-white/15 py-10 md:px-9 ${journeyIndex === 0 ? 'md:border-r' : ''}`}>
-                <div className="flex items-center gap-4 text-sm text-white/45" aria-label={`${journey.products[0].title}, depois ${journey.products[1].title}`}>
-                  <span>{journey.products[0].title.split(' em ')[0]}</span>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">{journey.context}</p>
+                <p className="mt-4 max-w-md text-base leading-7 text-white/65">{journey.description}</p>
+                <div className="mt-7 flex items-center gap-4 text-sm text-white/45" aria-label={`${journey.progression[0]}, depois ${journey.progression[1]}`}>
+                  <span>{journey.progression[0]}</span>
                   <ArrowRight className="size-4 shrink-0 text-lime-300" aria-hidden="true" />
-                  <span>{journey.products[1].title}</span>
+                  <span>{journey.progression[1]}</span>
                 </div>
                 <div className="mt-7 border-t border-white/15">
                   {journey.products.map((product, productIndex) => (
@@ -203,15 +220,13 @@ export default function Home() {
             <SectionLabel>Por que a Denkor</SectionLabel>
             <h2 className="mt-7 text-4xl font-semibold leading-tight tracking-[-0.045em] text-[#101412] sm:text-5xl">IA começa no processo, não na ferramenta.</h2>
             <div className="mt-9 space-y-5">
-              {[
-                'Aplicação prática em negócios e operações',
-                'Visão que conecta processo, solução e retorno',
-                'Formação acessível a quem não é programador',
-                'Abordagem orientada a diagnóstico e prioridade',
-              ].map((item) => (
-                <div key={item} className="flex gap-4 border-b border-[#101412]/12 pb-5 text-sm text-[#344039]">
-                  <Check className="mt-0.5 size-4 shrink-0 text-[#769149]" aria-hidden="true" />
-                  {item}
+              {denkorMethod.map((step, index) => (
+                <div key={step.label} className="flex gap-4 border-b border-[#101412]/12 pb-5 text-sm text-[#344039]">
+                  <span className="font-mono text-xs text-[#769149]">0{index + 1}</span>
+                  <div>
+                    <p className="font-semibold uppercase tracking-[0.12em] text-[#101412]">{step.label}</p>
+                    <p className="mt-1 leading-6">{step.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
