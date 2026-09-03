@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://denkor-intelligence.vitor-guitarfive.chatgpt.site'),
+  metadataBase: new URL('https://denkor.com.br'),
   title: {
     default: 'Denkor — Intelligence for Business',
     template: '%s — Denkor',
