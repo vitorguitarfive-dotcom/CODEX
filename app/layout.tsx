@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { WhatsAppFloating } from '@/components/whatsapp';
 import './globals.css';
 
@@ -32,6 +33,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18427985890"
+          strategy="beforeInteractive"
+        />
+        <Script id="google-ads-tag" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18427985890');
+          `}
+        </Script>
+      </head>
       <body className="antialiased">
         {children}
         <WhatsAppFloating />
