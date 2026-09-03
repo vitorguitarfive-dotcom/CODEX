@@ -211,7 +211,7 @@ export function InnerHero({
       <div className="mx-auto grid max-w-[1440px] px-5 py-16 sm:px-8 lg:min-h-[620px] lg:grid-cols-[1fr_300px] lg:px-12 lg:py-24">
         <div className="flex flex-col justify-center lg:border-r lg:border-white/10 lg:pr-16">
           <SectionLabel dark>{eyebrow}</SectionLabel>
-          <h1 className="mt-8 max-w-5xl text-[clamp(3rem,7vw,7rem)] font-semibold leading-[0.91] tracking-[-0.065em]">{title}</h1>
+          <h1 className="mt-8 max-w-5xl text-[2.5rem] font-semibold leading-[2.75rem] tracking-[-0.045em] lg:text-[4rem] lg:leading-[4.25rem]">{title}</h1>
           <p className="mt-9 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">{text}</p>
           {whatsapp && (
             <div className="mt-8">

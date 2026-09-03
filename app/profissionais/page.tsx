@@ -37,8 +37,8 @@ export default function ProfissionaisPage() {
       <SiteHeader />
       <InnerHero
         eyebrow="Para profissionais"
-        title="Domine a aplicação. Construa sua posição no mercado."
-        text="Duas formações complementares para quem quer aplicar inteligência artificial nos negócios e transformar essa capacidade em uma atuação profissional relevante."
+        title="Pare de apenas usar IA. Aprenda a aplicá-la aos negócios."
+        text="Desenvolva a capacidade de identificar problemas, encontrar oportunidades e construir aplicações de inteligência artificial que gerem resultados reais para empresas."
         index="01"
         whatsapp={{ label: 'Falar sobre as formações', contextKey: 'profissionais_hero', ctaId: 'hero-profissionais' }}
       />

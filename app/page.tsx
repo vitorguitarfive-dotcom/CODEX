@@ -31,11 +31,11 @@ export default function Home() {
         <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,1fr)] lg:gap-12 lg:px-12">
           <div className="flex flex-col justify-center py-16 sm:py-20 lg:justify-start lg:py-24">
             <SectionLabel dark>Intelligence for Business</SectionLabel>
-            <h1 className="mt-7 max-w-5xl text-[clamp(2.85rem,12vw,7.6rem)] font-semibold leading-[0.9] tracking-[-0.065em] sm:mt-8">
-              Inteligência que transforma negócios.
+            <h1 className="mt-7 max-w-5xl text-[2.5rem] font-semibold leading-[2.75rem] tracking-[-0.045em] sm:mt-8 lg:text-[4rem] lg:leading-[4.25rem]">
+              As ferramentas de IA estão ao alcance de todos. Transformá-las em resultado exige método.
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-7 text-white/65 sm:mt-9 sm:text-xl sm:leading-8">
-              A Denkor prepara profissionais e empresas para aplicar inteligência artificial em processos, decisões e crescimento.
+              A Denkor prepara profissionais e empresas para identificar onde a inteligência artificial pode gerar valor, aplicá-la aos processos e medir seu impacto no negócio.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
               <WhatsAppButton
@@ -106,15 +106,15 @@ export default function Home() {
             <SectionLabel>O que é a Denkor</SectionLabel>
           </div>
           <div>
-            <h2 className="max-w-4xl text-[clamp(2.5rem,5vw,5.2rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-[#101412]">
-              Educação e transformação empresarial através da IA.
+            <h2 className="max-w-4xl text-[2rem] font-semibold leading-[2.375rem] tracking-[-0.045em] text-[#101412] lg:text-[3rem] lg:leading-[3.375rem]">
+              Não basta usar IA. É preciso fazê-la gerar resultado.
             </h2>
             <div className="mt-10 grid gap-8 border-t border-[#101412]/15 pt-8 sm:grid-cols-2">
               <p className="text-base leading-7 text-[#344039]">
-                Não ensinamos IA como uma coleção de ferramentas. Ensinamos pessoas a olhar para negócios, processos e decisões com uma nova capacidade de análise e execução.
+                O mercado não precisa apenas de pessoas que saibam conversar com ferramentas. Precisa de profissionais capazes de analisar processos, identificar oportunidades, construir soluções e transformar inteligência artificial em produtividade, eficiência e crescimento.
               </p>
               <p className="text-base leading-7 text-[#344039]">
-                O foco está na aplicação prática: encontrar oportunidades, desenhar agentes e automações, priorizar projetos e construir resultados mensuráveis.
+                É isso que a Denkor ensina.
               </p>
             </div>
           </div>

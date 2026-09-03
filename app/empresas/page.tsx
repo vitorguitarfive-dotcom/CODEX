@@ -39,8 +39,8 @@ export default function EmpresasPage() {
       <SiteHeader />
       <InnerHero
         eyebrow="Para empresas"
-        title="Clareza para começar. Capacidade para evoluir."
-        text="A Denkor ajuda empresas a capacitar líderes, encontrar oportunidades de alto valor e formar pessoas capazes de conduzir a aplicação de IA por dentro."
+        title="Sua empresa já tem acesso à IA. Mas sabe onde aplicá-la?"
+        text="A Denkor capacita líderes e equipes para identificar oportunidades reais, transformar processos e implementar a inteligência artificial com estratégia, segurança e resultados mensuráveis."
         index="02"
         whatsapp={{ label: 'Conversar sobre minha empresa', contextKey: 'empresas_hero', ctaId: 'hero-empresas' }}
       />
