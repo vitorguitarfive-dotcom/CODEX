@@ -32,8 +32,8 @@ export default function Home() {
       <SiteHeader />
 
       <section className="relative isolate bg-[#101412] text-white">
-        <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,.8fr)] lg:px-12">
-          <div className="flex flex-col justify-center py-16 sm:py-20 lg:border-r lg:border-white/10 lg:py-24 lg:pr-16">
+        <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,1fr)] lg:gap-12 lg:px-12">
+          <div className="flex flex-col justify-center py-16 sm:py-20 lg:justify-start lg:py-24">
             <SectionLabel dark>Intelligence for Business</SectionLabel>
             <h1 className="mt-7 max-w-5xl text-[clamp(2.85rem,12vw,7.6rem)] font-semibold leading-[0.9] tracking-[-0.065em] sm:mt-8">
               Inteligência que transforma negócios.
@@ -67,8 +67,8 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="hidden flex-col justify-end border-t border-white/10 py-10 sm:py-12 lg:flex lg:border-t-0 lg:py-16 lg:pl-12">
-            <div className="mb-auto hidden justify-end lg:flex">
+          <div className="hidden flex-col justify-start gap-5 border-t border-white/10 py-10 sm:py-12 lg:flex lg:border-t-0 lg:py-24">
+            <div className="hidden justify-end lg:flex">
               <span className="text-right text-[11px] uppercase leading-5 tracking-[0.2em] text-white/35">
                 Educação executiva
                 <br />
