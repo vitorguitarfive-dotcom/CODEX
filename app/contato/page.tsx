@@ -68,7 +68,7 @@ export default function ContatoPage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter contextKey="contato_geral" ctaId="footer-whatsapp-contato" />
     </main>
   );
 }

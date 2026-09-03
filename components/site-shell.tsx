@@ -86,7 +86,13 @@ export function SiteHeader() {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({
+  contextKey = 'home_cta_final',
+  ctaId = 'footer-whatsapp-home',
+}: {
+  contextKey?: WhatsAppContextKey;
+  ctaId?: string;
+}) {
   return (
     <footer className="bg-[#0c100e] text-white">
       <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1.2fr_.8fr_.8fr] lg:px-12 lg:py-20">
@@ -110,8 +116,8 @@ export function SiteFooter() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">Próximo passo</p>
           <div className="mt-5">
             <WhatsAppButton
-              contextKey="header_falar_com_denkor"
-              ctaId="footer-whatsapp"
+              contextKey={contextKey}
+              ctaId={ctaId}
               position="footer"
               variant="secondary"
               className="w-full border-white/30 text-white hover:bg-white hover:text-[#101412] focus-visible:outline-[#dff57a]"

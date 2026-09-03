@@ -120,7 +120,7 @@ export default function SobrePage() {
         contextKey="sobre_cta_final"
         ctaId="cta-final-sobre"
       />
-      <SiteFooter />
+      <SiteFooter contextKey="sobre_cta_final" ctaId="footer-whatsapp-sobre" />
     </main>
   );
 }

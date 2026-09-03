@@ -142,7 +142,7 @@ export default function EmpresasPage() {
         contextKey="empresas_cta_final"
         ctaId="cta-final-empresas"
       />
-      <SiteFooter />
+      <SiteFooter contextKey="empresas_cta_final" ctaId="footer-whatsapp-empresas" />
     </main>
   );
 }

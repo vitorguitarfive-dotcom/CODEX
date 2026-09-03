@@ -126,7 +126,7 @@ export default function ProfissionaisPage() {
         contextKey="profissionais_cta_final"
         ctaId="cta-final-profissionais"
       />
-      <SiteFooter />
+      <SiteFooter contextKey="profissionais_cta_final" ctaId="footer-whatsapp-profissionais" />
     </main>
   );
 }
