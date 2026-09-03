@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check } from 'lucide-react';
 import { AIDiagnostic } from '@/components/ai-diagnostic';
+import { InternationalPresence, ProofCases } from '@/components/proof-sections';
 import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
 import { WhatsAppButton } from '@/components/whatsapp';
 
@@ -92,6 +93,7 @@ export default function Home() {
       </section>
 
       <AIDiagnostic />
+      <InternationalPresence />
 
       <section className="bg-[#101412] px-5 py-12 text-white lg:hidden">
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-lime-300">Da oportunidade ao impacto</p>
@@ -158,6 +160,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ProofCases />
 
       <section className="bg-[#101412] text-white">
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
