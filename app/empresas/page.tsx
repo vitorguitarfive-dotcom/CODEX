@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowRight, Check, Clock3, Map, Network, PackageCheck, Search } from 'lucide-react';
+import { Check, Clock3, Map, Network, PackageCheck, Search } from 'lucide-react';
 import { ClosingCta, InnerHero, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
+import { WhatsAppButton } from '@/components/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Para Empresas | Denkor',
@@ -42,6 +42,7 @@ export default function EmpresasPage() {
         title="Clareza para começar. Capacidade para evoluir."
         text="A Denkor ajuda empresas a capacitar líderes, encontrar oportunidades de alto valor e formar pessoas capazes de conduzir a aplicação de IA por dentro."
         index="02"
+        whatsapp={{ label: 'Conversar sobre minha empresa', contextKey: 'empresas_hero', ctaId: 'hero-empresas' }}
       />
 
       <section className="bg-[#f3f0e7]">
@@ -73,10 +74,16 @@ export default function EmpresasPage() {
                   </div>
                   <h2 className="mt-12 text-4xl font-semibold leading-[1] tracking-[-0.05em] text-[#101412] sm:text-6xl">{solution.title}</h2>
                   <p className="mt-7 text-lg leading-8 text-[#526057]">{solution.summary}</p>
-                  <Link href={`/contato?interesse=${solution.id}`} className="group mt-9 inline-flex min-h-12 items-center gap-8 bg-[#101412] px-5 font-semibold text-white transition-colors hover:bg-[#273129]">
-                    Agendar conversa
-                    <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                  </Link>
+                  <div className="mt-9">
+                    <WhatsAppButton
+                      contextKey={solution.id === 'transformation-day' ? 'empresas_transformation_day' : 'empresas_ai_champions'}
+                      ctaId={solution.id === 'transformation-day' ? 'empresa-transformation-day' : 'empresa-ai-champions'}
+                      position="programa"
+                      className="bg-[#101412] text-white hover:bg-[#344039] focus-visible:outline-[#769149]"
+                    >
+                      {solution.id === 'transformation-day' ? 'Agendar no WhatsApp' : 'Tirar dúvidas no WhatsApp'}
+                    </WhatsAppButton>
+                  </div>
                 </div>
 
                 <div className="grid gap-px bg-[#101412]/15 sm:grid-cols-2">

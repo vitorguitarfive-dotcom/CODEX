@@ -2,28 +2,18 @@
 
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ArrowUpRight, RotateCcw, Target } from 'lucide-react';
-import { type ComponentProps, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+import { WhatsAppButton } from '@/components/whatsapp';
 import {
   diagnosticQuestions,
   diagnosticResults,
   getDiagnosticResult,
   type DiagnosticAnswerMap,
   type DiagnosticProfile,
-  type DiagnosticResult,
   type DiagnosticResultId,
 } from '@/lib/diagnostic';
-import { trackDiagnosticEvent } from '@/lib/diagnostic-analytics';
+import { trackDiagnosticEvent } from '@/lib/analytics';
 
 type DiagnosticView = 'start' | 'questions' | 'result';
 
@@ -195,207 +185,11 @@ function DiagnosticQuestionView({
   );
 }
 
-function formatWhatsapp(value: string) {
-  const digits = value.replace(/\D/g, '').slice(0, 11);
-  if (!digits) return '';
-  if (digits.length <= 2) return `(${digits}`;
-
-  const areaCode = digits.slice(0, 2);
-  const number = digits.slice(2);
-  if (number.length <= 4) return `(${areaCode}) ${number}`;
-
-  const splitAt = number.length > 8 ? 5 : 4;
-  return `(${areaCode}) ${number.slice(0, splitAt)}-${number.slice(splitAt)}`;
-}
-
-function DiagnosticLeadDialog({
-  result,
-  profile,
-  answers,
-}: {
-  result: DiagnosticResult;
-  profile: DiagnosticProfile;
-  answers: DiagnosticAnswerMap;
-}) {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
-  const [website, setWebsite] = useState('');
-  const [formError, setFormError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const openDialog = () => {
-    setOpen(true);
-    setFormError('');
-    trackDiagnosticEvent('diagnostic_cta_clicked', { result: result.id, action: 'open_lead_dialog' });
-    trackDiagnosticEvent('diagnostic_lead_opened', { result: result.id, profile });
-  };
-
-  const submitLead: NonNullable<ComponentProps<'form'>['onSubmit']> = async (event) => {
-    event.preventDefault();
-    const cleanName = name.trim().replace(/\s+/g, ' ');
-    const cleanWhatsapp = whatsapp.replace(/\D/g, '');
-
-    if (cleanName.length < 2) {
-      setFormError('Informe seu nome.');
-      return;
-    }
-
-    if (cleanWhatsapp.length < 10) {
-      setFormError('Informe um WhatsApp com DDD.');
-      return;
-    }
-
-    setIsSubmitting(true);
-    setFormError('');
-
-    try {
-      const response = await fetch('/api/diagnostic-leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: cleanName,
-          whatsapp: cleanWhatsapp,
-          profile,
-          answers,
-          website,
-          sourceUrl: window.location.href,
-        }),
-      });
-      const responseBody = (await response.json()) as { error?: string };
-
-      if (!response.ok) throw new Error(responseBody.error || 'Não foi possível enviar agora.');
-
-      setIsSubmitted(true);
-      trackDiagnosticEvent('diagnostic_lead_submitted', { result: result.id, profile });
-    } catch (error) {
-      setFormError(error instanceof Error ? error.message : 'Não foi possível enviar agora. Tente novamente.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <Button
-        type="button"
-        onClick={openDialog}
-        className="group h-auto min-h-16 w-full justify-between rounded-none bg-lime-300 px-5 py-4 text-left text-base font-semibold whitespace-normal text-[#101412] hover:bg-lime-200 focus-visible:ring-lime-300 sm:w-auto sm:min-w-[360px]"
-      >
-        <span>
-          <span className="block text-[10px] uppercase tracking-[0.17em] text-[#344039]">Tenho interesse em</span>
-          <span className="mt-1 block">{result.title}</span>
-        </span>
-        <ArrowUpRight className="size-5 transition-transform group-hover/button:-translate-y-0.5 group-hover/button:translate-x-0.5" aria-hidden="true" />
-      </Button>
-
-      <DialogContent
-        showCloseButton={false}
-        className="fixed top-auto bottom-0 left-0 max-h-[calc(100svh-0.5rem)] w-full max-w-none translate-x-0 translate-y-0 gap-0 overflow-y-auto rounded-none bg-[#f3f0e7] p-0 text-[#101412] ring-1 ring-white/15 sm:top-1/2 sm:bottom-auto sm:left-1/2 sm:max-w-xl sm:-translate-x-1/2 sm:-translate-y-1/2"
-      >
-        {isSubmitted ? (
-          <div className="diagnostic-enter">
-            <div className="bg-lime-300 px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em]">Contato recebido</div>
-            <div className="px-6 py-9 sm:px-10 sm:py-11">
-              <DialogHeader>
-                <DialogTitle className="text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl">Seu diagnóstico foi enviado.</DialogTitle>
-                <DialogDescription className="mt-4 text-base leading-7 text-[#526057]">
-                  Registramos seu interesse em {result.title}. A Denkor poderá continuar essa conversa pelo WhatsApp informado.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="mt-8 flex flex-col gap-3">
-                <Link
-                  href={result.href}
-                  className="group inline-flex min-h-14 items-center justify-between bg-[#101412] px-5 font-semibold text-white"
-                >
-                  Conhecer o produto
-                  <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </Link>
-                <DialogClose className="min-h-12 border border-[#101412]/20 text-sm font-semibold transition-colors hover:bg-white">
-                  Voltar ao resultado
-                </DialogClose>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <>
-            <div className="flex items-center justify-between bg-lime-300 px-6 py-4">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em]">Próximo passo</span>
-              <DialogClose className="text-xs font-semibold uppercase tracking-[0.16em] underline decoration-[#101412]/35 underline-offset-4">Fechar</DialogClose>
-            </div>
-            <div className="px-6 py-8 sm:px-10 sm:py-10">
-              <DialogHeader>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#65764b]">Produto recomendado</p>
-                <DialogTitle className="mt-2 text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl">{result.title}</DialogTitle>
-                <DialogDescription className="mt-3 text-base leading-7 text-[#526057]">
-                  Deixe seu nome e WhatsApp. As respostas do diagnóstico serão enviadas junto com o seu contato.
-                </DialogDescription>
-              </DialogHeader>
-
-              <form onSubmit={submitLead} className="mt-8" noValidate>
-                <FieldGroup className="gap-5">
-                  <Field>
-                    <FieldLabel htmlFor="diagnostic-name" className="text-xs font-semibold uppercase tracking-[0.15em] text-[#344039]">Nome</FieldLabel>
-                    <Input
-                      id="diagnostic-name"
-                      name="name"
-                      autoComplete="name"
-                      value={name}
-                      onChange={(event) => setName(event.target.value)}
-                      placeholder="Como podemos chamar você?"
-                      className="h-14 rounded-none border-0 border-b border-[#101412]/25 bg-transparent px-0 text-base focus-visible:border-[#65764b] focus-visible:ring-0"
-                      aria-invalid={formError === 'Informe seu nome.'}
-                    />
-                  </Field>
-                  <Field>
-                    <FieldLabel htmlFor="diagnostic-whatsapp" className="text-xs font-semibold uppercase tracking-[0.15em] text-[#344039]">WhatsApp com DDD</FieldLabel>
-                    <Input
-                      id="diagnostic-whatsapp"
-                      name="whatsapp"
-                      type="tel"
-                      inputMode="tel"
-                      autoComplete="tel"
-                      value={whatsapp}
-                      onChange={(event) => setWhatsapp(formatWhatsapp(event.target.value))}
-                      placeholder="(11) 99999-9999"
-                      className="h-14 rounded-none border-0 border-b border-[#101412]/25 bg-transparent px-0 text-base focus-visible:border-[#65764b] focus-visible:ring-0"
-                      aria-invalid={formError === 'Informe um WhatsApp com DDD.'}
-                    />
-                  </Field>
-                  <div className="pointer-events-none absolute -left-[9999px]" aria-hidden="true">
-                    <label htmlFor="diagnostic-website">Website</label>
-                    <input id="diagnostic-website" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(event) => setWebsite(event.target.value)} />
-                  </div>
-                  {formError && <FieldError>{formError}</FieldError>}
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="mt-2 min-h-14 w-full justify-between rounded-none bg-[#101412] px-5 text-base font-semibold text-white hover:bg-[#202823] focus-visible:ring-[#65764b]"
-                  >
-                    {isSubmitting ? 'Enviando...' : 'Enviar meu diagnóstico'}
-                    <ArrowRight className="size-5" aria-hidden="true" />
-                  </Button>
-                </FieldGroup>
-              </form>
-              <p className="mt-5 text-xs leading-5 text-[#657069]">Usaremos seus dados apenas para entrar em contato sobre esta recomendação.</p>
-            </div>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
-  );
-}
-
 function DiagnosticResultView({
   resultId,
-  profile,
-  answers,
   onRestart,
 }: {
   resultId: DiagnosticResultId;
-  profile: DiagnosticProfile;
-  answers: DiagnosticAnswerMap;
   onRestart: () => void;
 }) {
   const result = diagnosticResults[resultId];
@@ -429,8 +223,22 @@ function DiagnosticResultView({
           </div>
         )}
 
-        <div className="mt-10 flex flex-col items-start gap-6 sm:mt-12 sm:flex-row sm:items-center">
-          <DiagnosticLeadDialog result={result} profile={profile} answers={answers} />
+        <div className="mt-10 flex flex-col items-start gap-5 sm:mt-12">
+          <WhatsAppButton
+            contextKey="home_diagnostico"
+            ctaId="diagnostico-resultado"
+            position="diagnostico-resultado"
+            extra={{ resultado: result.title }}
+            microcopyTone="dark"
+          >
+            Falar com a Denkor sobre isso
+          </WhatsAppButton>
+          <Link
+            href={result.href}
+            className="text-sm text-white/65 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]"
+          >
+            Ver a página do programa
+          </Link>
           <Button type="button" variant="ghost" onClick={onRestart} className="h-auto rounded-none px-0 py-2 text-sm text-white/45 hover:bg-transparent hover:text-white focus-visible:ring-lime-300/70">
             <RotateCcw className="size-4" aria-hidden="true" />
             Refazer diagnóstico
@@ -548,7 +356,7 @@ export function AIDiagnostic() {
           />
         )}
         {view === 'result' && resultId && profile && (
-          <DiagnosticResultView resultId={resultId} profile={profile} answers={answers} onRestart={restart} />
+          <DiagnosticResultView resultId={resultId} onRestart={restart} />
         )}
       </div>
     </section>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check } from 'lucide-react';
 import { AIDiagnostic } from '@/components/ai-diagnostic';
 import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
+import { WhatsAppButton } from '@/components/whatsapp';
 
 const products = [
   {
@@ -53,14 +54,24 @@ export default function Home() {
               A Denkor prepara profissionais e empresas para aplicar inteligência artificial em processos, decisões e crescimento.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
-              <Link href="/profissionais" className="group inline-flex min-h-14 items-center justify-between gap-6 bg-lime-300 px-5 font-semibold text-[#101412] transition-colors hover:bg-lime-200">
+              <WhatsAppButton
+                contextKey="home_hero_profissional"
+                ctaId="hero-profissional"
+                position="hero"
+                microcopyTone="dark"
+              >
                 Quero me tornar especialista
-                <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-              </Link>
-              <Link href="/empresas" className="group inline-flex min-h-14 items-center justify-between gap-6 border border-white/20 px-5 font-semibold text-white transition-colors hover:border-white/50 hover:bg-white/5">
+              </WhatsAppButton>
+              <WhatsAppButton
+                contextKey="home_hero_empresa"
+                ctaId="hero-empresa"
+                position="hero"
+                variant="secondary"
+                className="border-white/30 text-white hover:bg-white hover:text-[#101412] focus-visible:outline-[#dff57a]"
+                microcopyTone="dark"
+              >
                 Quero levar IA para minha empresa
-                <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-              </Link>
+              </WhatsAppButton>
             </div>
             <Link href="#diagnostico" className="group mt-6 inline-flex max-w-max items-center gap-3 border-b border-lime-300/35 pb-2 text-sm text-white/65 transition-colors hover:border-lime-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300">
               <span><strong className="font-semibold text-lime-300">Está em dúvida?</strong> Faça o diagnóstico de 1 minuto</span>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowRight, Check, Clock3, GraduationCap, Users } from 'lucide-react';
+import { Check, Clock3, GraduationCap, Users } from 'lucide-react';
 import { ClosingCta, InnerHero, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
+import { WhatsAppButton } from '@/components/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Para Profissionais | Denkor',
@@ -40,6 +40,7 @@ export default function ProfissionaisPage() {
         title="Domine a aplicação. Construa sua posição no mercado."
         text="Duas formações complementares para quem quer aplicar inteligência artificial nos negócios e transformar essa capacidade em uma atuação profissional relevante."
         index="01"
+        whatsapp={{ label: 'Falar sobre as formações', contextKey: 'profissionais_hero', ctaId: 'hero-profissionais' }}
       />
 
       <section className="bg-[#f3f0e7]">
@@ -74,10 +75,16 @@ export default function ProfissionaisPage() {
                 <span className="font-mono text-sm text-[#65764b]">{course.number}</span>
                 <h2 className="mt-6 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[#101412] sm:text-5xl">{course.title}</h2>
                 <p className="mt-6 max-w-xl text-lg leading-8 text-[#526057]">{course.promise}</p>
-                <Link href={`/contato?interesse=${course.id}`} className="group mt-9 inline-flex min-h-12 items-center gap-8 bg-[#101412] px-5 font-semibold text-white transition-colors hover:bg-[#273129]">
-                  Conhecer formação
-                  <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </Link>
+                <div className="mt-9">
+                  <WhatsAppButton
+                    contextKey={course.id === 'especialista' ? 'profissionais_especialista' : 'profissionais_consultor'}
+                    ctaId={course.id === 'especialista' ? 'programa-especialista' : 'programa-consultor'}
+                    position="programa"
+                    className="bg-[#101412] text-white hover:bg-[#344039] focus-visible:outline-[#769149]"
+                  >
+                    Tirar dúvidas no WhatsApp
+                  </WhatsAppButton>
+                </div>
               </div>
 
               <div className="grid gap-px bg-[#101412]/15 sm:grid-cols-2">

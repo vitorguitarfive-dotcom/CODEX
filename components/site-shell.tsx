@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
+import { WhatsAppButton } from '@/components/whatsapp';
+import type { WhatsAppContextKey } from '@/lib/whatsapp';
 
 const navigation = [
   { label: 'Profissionais', href: '/profissionais' },
@@ -41,13 +43,17 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <Link
-          href="/contato"
-          className="hidden h-10 items-center gap-2 bg-lime-300 px-4 text-sm font-semibold text-[#101412] transition-colors hover:bg-lime-200 sm:inline-flex"
-        >
-          Fale com a Denkor
-          <ArrowUpRight className="size-4" aria-hidden="true" />
-        </Link>
+        <div className="hidden sm:block">
+          <WhatsAppButton
+            contextKey="header_falar_com_denkor"
+            ctaId="header-whatsapp"
+            position="header"
+            className="min-h-10 px-4 text-sm"
+            microcopyTone="dark"
+          >
+            Falar no WhatsApp
+          </WhatsAppButton>
+        </div>
 
         <details className="group relative sm:hidden">
           <summary className="grid size-10 cursor-pointer list-none place-items-center border border-white/20 text-white [&::-webkit-details-marker]:hidden">
@@ -62,6 +68,17 @@ export function SiteHeader() {
                 </Link>
               ))}
             </nav>
+            <div className="mt-3 px-3 pb-2">
+              <WhatsAppButton
+                contextKey="header_falar_com_denkor"
+                ctaId="header-whatsapp-mobile"
+                position="menu-mobile"
+                className="w-full text-sm"
+                microcopyTone="dark"
+              >
+                Falar no WhatsApp
+              </WhatsAppButton>
+            </div>
           </div>
         </details>
       </div>
@@ -91,16 +108,32 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">Próximo passo</p>
-          <Link href="/contato" className="group mt-5 flex items-center justify-between border-b border-white/20 pb-4 text-sm font-medium text-white">
-            Começar uma conversa
-            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-          </Link>
+          <div className="mt-5">
+            <WhatsAppButton
+              contextKey="header_falar_com_denkor"
+              ctaId="footer-whatsapp"
+              position="footer"
+              variant="secondary"
+              className="w-full border-white/30 text-white hover:bg-white hover:text-[#101412] focus-visible:outline-[#dff57a]"
+              microcopyTone="dark"
+            >
+              Conversar no WhatsApp
+            </WhatsAppButton>
+          </div>
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-2 px-5 py-5 text-[11px] uppercase tracking-[0.14em] text-white/30 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
-          <span>© {new Date().getFullYear()} Denkor</span>
-          <span>Intelligence for Business</span>
+        <div className="mx-auto max-w-[1440px] px-5 py-5 sm:px-8 lg:px-12">
+          <p className="text-sm text-white/65">
+            Prefere e-mail? Escreva para{' '}
+            <a href="mailto:contato@denkor.com.br" className="underline decoration-white/30 underline-offset-4 focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]">
+              contato@denkor.com.br
+            </a>
+          </p>
+          <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4 text-[11px] uppercase tracking-[0.14em] text-white/30 sm:flex-row sm:items-center sm:justify-between">
+            <span>© {new Date().getFullYear()} Denkor</span>
+            <span>Intelligence for Business</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -116,20 +149,29 @@ export function SectionLabel({ children, dark = false }: { children: React.React
   );
 }
 
-export function ClosingCta() {
+export function ClosingCta({
+  title = 'Transforme intenção em aplicação real.',
+  label = 'Conversar com a Denkor',
+  contextKey = 'home_cta_final',
+  ctaId = 'cta-final-home',
+}: {
+  title?: string;
+  label?: string;
+  contextKey?: WhatsAppContextKey;
+  ctaId?: string;
+}) {
   return (
     <section className="bg-lime-300 text-[#101412]">
       <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end lg:px-12 lg:py-24">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em]">Comece por onde faz sentido</p>
           <h2 className="mt-5 max-w-4xl text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
-            Transforme intenção em aplicação real.
+            {title}
           </h2>
         </div>
-        <Link href="/contato" className="group inline-flex min-h-14 items-center justify-between gap-8 border border-[#101412]/35 px-5 font-semibold transition-colors hover:bg-[#101412] hover:text-white">
-          Conversar com a Denkor
-          <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-        </Link>
+        <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final" variant="secondary">
+          {label}
+        </WhatsAppButton>
       </div>
     </section>
   );
@@ -140,11 +182,13 @@ export function InnerHero({
   title,
   text,
   index,
+  whatsapp,
 }: {
   eyebrow: string;
   title: string;
   text: string;
   index: string;
+  whatsapp?: { label: string; contextKey: WhatsAppContextKey; ctaId: string };
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-[#101412] text-white">
@@ -154,6 +198,18 @@ export function InnerHero({
           <SectionLabel dark>{eyebrow}</SectionLabel>
           <h1 className="mt-8 max-w-5xl text-[clamp(3rem,7vw,7rem)] font-semibold leading-[0.91] tracking-[-0.065em]">{title}</h1>
           <p className="mt-9 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">{text}</p>
+          {whatsapp && (
+            <div className="mt-8">
+              <WhatsAppButton
+                contextKey={whatsapp.contextKey}
+                ctaId={whatsapp.ctaId}
+                position="hero"
+                microcopyTone="dark"
+              >
+                {whatsapp.label}
+              </WhatsAppButton>
+            </div>
+          )}
         </div>
         <div className="mt-14 flex items-end justify-between border-t border-white/10 pt-8 lg:mt-0 lg:border-t-0 lg:pl-10">
           <p className="text-[11px] uppercase leading-5 tracking-[0.18em] text-white/35">

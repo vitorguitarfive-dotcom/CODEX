@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { WhatsAppFloating } from '@/components/whatsapp';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="antialiased">
         {children}
+        <WhatsAppFloating />
       </body>
     </html>
   );
