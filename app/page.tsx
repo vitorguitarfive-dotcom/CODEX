@@ -32,7 +32,6 @@ export default function Home() {
       <SiteHeader />
 
       <section className="relative isolate bg-[#101412] text-white">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.055)_1px,transparent_1px)] bg-[size:68px_68px] [mask-image:linear-gradient(to_bottom,black,transparent_92%)]" />
         <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,.8fr)] lg:px-12">
           <div className="flex flex-col justify-center py-16 sm:py-20 lg:border-r lg:border-white/10 lg:py-24 lg:pr-16">
             <SectionLabel dark>Intelligence for Business</SectionLabel>
@@ -77,7 +76,7 @@ export default function Home() {
               </span>
             </div>
             <div className="relative">
-              <div className="absolute -left-4 top-0 h-full w-px bg-gradient-to-b from-lime-300 via-lime-300/30 to-transparent" />
+              <div className="absolute -left-4 top-0 h-full w-px bg-lime-300" />
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">Da oportunidade ao impacto</p>
               <div className="mt-7 space-y-1">
                 {heroSteps.map((step, index) => (
@@ -131,8 +130,8 @@ export default function Home() {
       <section className="bg-white">
         <div className="mx-auto grid max-w-[1440px] lg:grid-cols-2">
           <div className="border-b border-[#101412]/15 px-5 py-16 sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:py-24">
-            <BriefcaseBusiness className="size-8 text-[#526151]" strokeWidth={1.5} aria-hidden="true" />
-            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#526151]">Para profissionais</p>
+            <BriefcaseBusiness className="size-8 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#526057]">Para profissionais</p>
             <h2 className="mt-5 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.045em] text-[#101412] sm:text-5xl">
               Aprenda a aplicar. Prepare-se para liderar.
             </h2>
@@ -144,13 +143,13 @@ export default function Home() {
               <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </div>
-          <div className="bg-[#dff57a] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <div className="bg-[#f3f0e7] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
             <Building2 className="size-8 text-[#101412]" strokeWidth={1.5} aria-hidden="true" />
-            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#3e4939]">Para empresas</p>
+            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#344039]">Para empresas</p>
             <h2 className="mt-5 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.045em] text-[#101412] sm:text-5xl">
               Descubra onde começar. Crie capacidade interna.
             </h2>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#3e4939]">
+            <p className="mt-6 max-w-xl text-lg leading-8 text-[#344039]">
               Programas para capacitar líderes, mapear oportunidades reais e desenvolver pessoas capazes de conduzir a transformação por dentro.
             </p>
             <Link href="/empresas" className="group mt-10 inline-flex items-center gap-3 font-semibold text-[#101412]">
@@ -209,9 +208,9 @@ export default function Home() {
 
       <section className="bg-[#f3f0e7]">
         <div className="mx-auto grid max-w-[1440px] px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1fr] lg:px-12 lg:py-28">
-          <div className="relative min-h-[440px] overflow-hidden bg-[#202823]">
+          <div className="relative min-h-[440px] overflow-hidden bg-[#344039]">
             <img src="/team-meeting.jpg" alt="Líder e equipe analisando resultados em um ambiente corporativo" className="absolute inset-0 h-full w-full object-cover opacity-75 mix-blend-luminosity" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#101412]/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[#101412]/35" />
             <span className="absolute bottom-5 left-5 text-[10px] uppercase tracking-[0.16em] text-white/50">Foto: Pavel Danilyuk / Pexels</span>
           </div>
           <div className="flex flex-col justify-center bg-white p-7 sm:p-12 lg:p-16">
@@ -225,7 +224,7 @@ export default function Home() {
                 'Abordagem orientada a diagnóstico e prioridade',
               ].map((item) => (
                 <div key={item} className="flex gap-4 border-b border-[#101412]/12 pb-5 text-sm text-[#344039]">
-                  <Check className="mt-0.5 size-4 shrink-0 text-[#5f723f]" aria-hidden="true" />
+                  <Check className="mt-0.5 size-4 shrink-0 text-[#769149]" aria-hidden="true" />
                   {item}
                 </div>
               ))}

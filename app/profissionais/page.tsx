@@ -55,7 +55,7 @@ export default function ProfissionaisPage() {
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {['Entender o negócio', 'Diagnosticar processos', 'Desenhar soluções', 'Gerar resultado'].map((step, index) => (
               <div key={step} className="border border-[#101412]/15 bg-white p-5">
-                <span className="font-mono text-xs text-[#65764b]">0{index + 1}</span>
+                <span className="font-mono text-xs text-[#526057]">0{index + 1}</span>
                 <p className="mt-9 font-medium text-[#101412]">{step}</p>
               </div>
             ))}
@@ -72,7 +72,7 @@ export default function ProfissionaisPage() {
               className={`scroll-mt-24 grid gap-12 py-14 lg:grid-cols-[.82fr_1.18fr] lg:py-24 ${courseIndex === 0 ? 'border-b border-[#101412]/15 pt-0 lg:pt-0' : ''}`}
             >
               <div>
-                <span className="font-mono text-sm text-[#65764b]">{course.number}</span>
+                <span className="font-mono text-sm text-[#526057]">{course.number}</span>
                 <h2 className="mt-6 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[#101412] sm:text-5xl">{course.title}</h2>
                 <p className="mt-6 max-w-xl text-lg leading-8 text-[#526057]">{course.promise}</p>
                 <div className="mt-9">
@@ -89,18 +89,18 @@ export default function ProfissionaisPage() {
 
               <div className="grid gap-px bg-[#101412]/15 sm:grid-cols-2">
                 <div className="bg-[#f3f0e7] p-6 sm:col-span-2 sm:p-8">
-                  <Users className="size-6 text-[#65764b]" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#65764b]">Para quem é</h3>
+                  <Users className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Para quem é</h3>
                   <p className="mt-4 max-w-2xl leading-7 text-[#344039]">{course.audience}</p>
                 </div>
                 <div className="bg-[#f3f0e7] p-6 sm:p-8">
-                  <Clock3 className="size-6 text-[#65764b]" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#65764b]">Duração</h3>
+                  <Clock3 className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Duração</h3>
                   <p className="mt-4 text-sm leading-6 text-[#344039]">{course.duration}</p>
                 </div>
                 <div className="bg-[#f3f0e7] p-6 sm:p-8">
-                  <GraduationCap className="size-6 text-[#65764b]" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#65764b]">Certificação</h3>
+                  <GraduationCap className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Certificação</h3>
                   <p className="mt-4 text-sm leading-6 text-[#344039]">{course.certification}</p>
                 </div>
                 <div className="bg-[#101412] p-6 text-white sm:col-span-2 sm:p-8">

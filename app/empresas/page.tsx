@@ -69,8 +69,8 @@ export default function EmpresasPage() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <Icon className="size-9 text-[#65764b]" strokeWidth={1.5} aria-hidden="true" />
-                    <span className="font-mono text-sm text-[#65764b]">{solution.number}</span>
+                    <Icon className="size-9 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+                    <span className="font-mono text-sm text-[#526057]">{solution.number}</span>
                   </div>
                   <h2 className="mt-12 text-4xl font-semibold leading-[1] tracking-[-0.05em] text-[#101412] sm:text-6xl">{solution.title}</h2>
                   <p className="mt-7 text-lg leading-8 text-[#526057]">{solution.summary}</p>
@@ -88,8 +88,8 @@ export default function EmpresasPage() {
 
                 <div className="grid gap-px bg-[#101412]/15 sm:grid-cols-2">
                   <div className="bg-[#f3f0e7] p-6 sm:col-span-2 sm:p-8">
-                    <Map className="size-6 text-[#65764b]" strokeWidth={1.5} aria-hidden="true" />
-                    <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#65764b]">Problema que resolve</h3>
+                    <Map className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+                    <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Problema que resolve</h3>
                     <p className="mt-4 max-w-3xl leading-7 text-[#344039]">{solution.problem}</p>
                   </div>
                   <div className="bg-[#101412] p-6 text-white sm:col-span-2 sm:p-8">
@@ -104,13 +104,13 @@ export default function EmpresasPage() {
                     </div>
                   </div>
                   <div className="bg-[#f3f0e7] p-6 sm:p-8">
-                    <PackageCheck className="size-6 text-[#65764b]" strokeWidth={1.5} aria-hidden="true" />
-                    <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#65764b]">O que a empresa recebe</h3>
+                    <PackageCheck className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+                    <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">O que a empresa recebe</h3>
                     <p className="mt-4 text-sm leading-6 text-[#344039]">{solution.delivery}</p>
                   </div>
-                  <div className="bg-[#dff57a] p-6 sm:p-8">
-                    <Clock3 className="size-6 text-[#46533a]" strokeWidth={1.5} aria-hidden="true" />
-                    <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#46533a]">Duração</h3>
+                  <div className="bg-white p-6 sm:p-8">
+                    <Clock3 className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
+                    <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Duração</h3>
                     <p className="mt-4 text-sm leading-6 text-[#344039]">{solution.duration}</p>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default function EmpresasPage() {
 
       <section className="relative min-h-[560px] overflow-hidden bg-[#101412] text-white">
         <img src="/executive-workshop.jpg" alt="Profissionais participando de um workshop corporativo" className="absolute inset-0 h-full w-full object-cover opacity-35 mix-blend-luminosity" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#101412] via-[#101412]/80 to-[#101412]/35" />
+        <div className="absolute inset-0 bg-[#101412]/65" />
         <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] items-end px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
           <div className="max-w-3xl">
             <SectionLabel dark>Dentro da empresa</SectionLabel>

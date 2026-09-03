@@ -60,7 +60,7 @@ export function SiteHeader() {
             <Menu className="size-5" aria-hidden="true" />
             <span className="sr-only">Abrir menu</span>
           </summary>
-          <div className="absolute right-0 top-12 w-[min(88vw,320px)] border border-white/10 bg-[#151a17] p-3 shadow-2xl">
+          <div className="absolute right-0 top-12 w-[min(88vw,320px)] border border-white/10 bg-[#101412] p-3 shadow-2xl">
             <nav aria-label="Navegação móvel" className="flex flex-col">
               {navigation.map((item) => (
                 <Link key={item.href} href={item.href} className="border-b border-white/10 px-3 py-4 text-sm text-white/75 last:border-0 hover:text-white">
@@ -142,8 +142,8 @@ export function SiteFooter() {
 
 export function SectionLabel({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
-    <p className={`flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-lime-300' : 'text-[#536351]'}`}>
-      <span className={`h-px w-8 ${dark ? 'bg-lime-300' : 'bg-[#536351]'}`} />
+    <p className={`flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-lime-300' : 'text-[#526057]'}`}>
+      <span className={`h-px w-8 ${dark ? 'bg-lime-300' : 'bg-[#526057]'}`} />
       {children}
     </p>
   );
@@ -163,10 +163,10 @@ export function ClosingCta({
   href?: string;
 }) {
   return (
-    <section className="bg-lime-300 text-[#101412]">
+    <section className="border-t border-white/10 bg-[#101412] text-white">
       <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end lg:px-12 lg:py-24">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em]">Comece por onde faz sentido</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-lime-300">Comece por onde faz sentido</p>
           <h2 className="mt-5 max-w-4xl text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
             {title}
           </h2>
@@ -175,13 +175,13 @@ export function ClosingCta({
           <Link
             href={href}
             id={ctaId}
-            className="group inline-flex min-h-14 items-center justify-between gap-8 border border-[#101412]/35 px-5 font-semibold transition-colors hover:bg-[#101412] hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]"
+            className="group inline-flex min-h-14 items-center justify-between gap-8 border border-white/30 px-5 font-semibold transition-colors hover:bg-white hover:text-[#101412] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]"
           >
             {label}
             <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </Link>
         ) : (
-          <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final" variant="secondary">
+          <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final" microcopyTone="dark">
             {label}
           </WhatsAppButton>
         )}
@@ -205,7 +205,6 @@ export function InnerHero({
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-[#101412] text-white">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:68px_68px] [mask-image:linear-gradient(to_bottom,black,transparent_95%)]" />
       <div className="mx-auto grid max-w-[1440px] px-5 py-16 sm:px-8 lg:min-h-[620px] lg:grid-cols-[1fr_300px] lg:px-12 lg:py-24">
         <div className="flex flex-col justify-center lg:border-r lg:border-white/10 lg:pr-16">
           <SectionLabel dark>{eyebrow}</SectionLabel>

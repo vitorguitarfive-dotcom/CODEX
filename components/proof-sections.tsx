@@ -34,7 +34,7 @@ export function ProofCases() {
         <div className="mt-10 grid gap-px bg-[#101412]/15 lg:grid-cols-3">
           {proofCases.map((item) => (
             <article key={item.category} className="bg-white p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#769149]">{item.category}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#526057]">{item.category}</p>
               <dl className="mt-10 space-y-7">
                 <div className="border-t border-[#101412]/15 pt-5">
                   <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-[#344039]">Problema</dt>

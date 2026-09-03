@@ -37,7 +37,7 @@ export default function SobrePage() {
       <section className="bg-white">
         <div className="mx-auto grid max-w-[1440px] lg:grid-cols-2">
           <div className="border-b border-[#101412]/15 px-5 py-16 sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:py-24">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#65764b]">A Denkor é</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#526057]">A Denkor é</p>
             <div className="mt-10 space-y-5">
               {[
                 'Educação em IA aplicada a negócios',
@@ -47,7 +47,7 @@ export default function SobrePage() {
                 'Capacitação para aplicação e comercialização',
               ].map((item) => (
                 <div key={item} className="flex gap-4 border-b border-[#101412]/12 pb-5 text-[#344039]">
-                  <Check className="mt-0.5 size-4 shrink-0 text-[#65764b]" aria-hidden="true" />
+                  <Check className="mt-0.5 size-4 shrink-0 text-[#769149]" aria-hidden="true" />
                   {item}
                 </div>
               ))}
@@ -73,7 +73,7 @@ export default function SobrePage() {
         </div>
       </section>
 
-      <section className="bg-[#dff57a] text-[#101412]">
+      <section className="bg-[#f3f0e7] text-[#101412]">
         <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
           <SectionLabel>Como pensamos</SectionLabel>
           <div className="mt-12 grid gap-px bg-[#101412]/25 lg:grid-cols-4">
@@ -83,13 +83,13 @@ export default function SobrePage() {
               ['03', 'Solução', 'Escolher a aplicação de IA que realmente faz sentido.'],
               ['04', 'Resultado', 'Definir como o impacto será acompanhado e medido.'],
             ].map(([number, title, text]) => (
-              <div key={number} className="min-h-[300px] bg-[#dff57a] p-6 sm:p-8">
+              <div key={number} className="min-h-[300px] bg-white p-6 sm:p-8">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs">{number}</span>
                   <ArrowDown className="size-4 opacity-40" aria-hidden="true" />
                 </div>
                 <h3 className="mt-24 text-2xl font-semibold">{title}</h3>
-                <p className="mt-4 text-sm leading-6 text-[#46533f]">{text}</p>
+                <p className="mt-4 text-sm leading-6 text-[#526057]">{text}</p>
               </div>
             ))}
           </div>
@@ -101,12 +101,12 @@ export default function SobrePage() {
           <SectionLabel>Uma marca, dois públicos</SectionLabel>
           <div className="grid gap-10 sm:grid-cols-2">
             <div>
-              <p className="font-mono text-xs text-[#65764b]">B2C</p>
+              <p className="font-mono text-xs text-[#526057]">B2C</p>
               <h3 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-[#101412]">Profissionais</h3>
               <p className="mt-4 leading-7 text-[#526057]">Formação para aplicar inteligência artificial em negócios e comercializar projetos para empresas.</p>
             </div>
             <div>
-              <p className="font-mono text-xs text-[#65764b]">B2B</p>
+              <p className="font-mono text-xs text-[#526057]">B2B</p>
               <h3 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-[#101412]">Empresas</h3>
               <p className="mt-4 leading-7 text-[#526057]">Programas para identificar oportunidades, capacitar lideranças e desenvolver capacidade interna.</p>
             </div>

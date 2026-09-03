@@ -54,8 +54,8 @@ function DiagnosticStart({ onSelect }: { onSelect: (profile: DiagnosticProfile) 
       <div className="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
         <div className="grid gap-7 lg:grid-cols-[.62fr_1.38fr] lg:gap-12">
           <div className="flex items-center gap-4 lg:block">
-            <Target className="size-8 shrink-0 text-[#536351] lg:size-9" strokeWidth={1.5} aria-hidden="true" />
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#536351] lg:mt-6">Comece por aqui</p>
+            <Target className="size-8 shrink-0 text-[#526057] lg:size-9" strokeWidth={1.5} aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#526057] lg:mt-6">Comece por aqui</p>
           </div>
           <div>
             <h2 className="max-w-5xl text-[clamp(2.45rem,10vw,5rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-[#101412]">
@@ -79,13 +79,13 @@ function DiagnosticStart({ onSelect }: { onSelect: (profile: DiagnosticProfile) 
               type="button"
               variant="ghost"
               onClick={() => onSelect(choice.id)}
-              className={`group relative h-auto min-h-[190px] w-full flex-col items-start justify-between rounded-none px-5 py-6 text-left whitespace-normal hover:bg-white focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-[#65764b] sm:min-h-[220px] sm:px-8 sm:py-8 lg:min-h-[260px] lg:py-10 ${
+              className={`group relative h-auto min-h-[190px] w-full flex-col items-start justify-between rounded-none px-5 py-6 text-left whitespace-normal hover:bg-white focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-[#769149] sm:min-h-[220px] sm:px-8 sm:py-8 lg:min-h-[260px] lg:py-10 ${
                 index === 0 ? 'border-b border-[#101412]/15 lg:border-r lg:border-b-0' : ''
               }`}
             >
               <div className="flex w-full items-center justify-between">
-                <span className="font-mono text-xs text-[#65764b]">{choice.number}</span>
-                <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#536351]">
+                <span className="font-mono text-xs text-[#526057]">{choice.number}</span>
+                <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#526057]">
                   Começar
                   <ArrowUpRight className="size-4 transition-transform duration-300 group-hover/button:-translate-y-1 group-hover/button:translate-x-1" aria-hidden="true" />
                 </span>
@@ -99,7 +99,7 @@ function DiagnosticStart({ onSelect }: { onSelect: (profile: DiagnosticProfile) 
           ))}
         </div>
 
-        <p className="mt-6 text-sm text-[#657069]">IA começa no processo, não na ferramenta.</p>
+        <p className="mt-6 text-sm text-[#526057]">IA começa no processo, não na ferramenta.</p>
       </div>
     </>
   );
