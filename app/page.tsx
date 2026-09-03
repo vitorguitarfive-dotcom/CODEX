@@ -7,16 +7,12 @@ import { WhatsAppButton } from '@/components/whatsapp';
 
 const productJourneys = [
   {
-    audience: 'Para profissionais',
-    href: '/profissionais#especialista',
     products: [
       { title: 'Especialista em IA para Negócios', href: '/profissionais#especialista' },
       { title: 'Consultor de IA para Empresas', href: '/profissionais#consultor' },
     ],
   },
   {
-    audience: 'Para empresas',
-    href: '/empresas#transformation-day',
     products: [
       { title: 'AI Transformation Day', href: '/empresas#transformation-day' },
       { title: 'AI Champions', href: '/empresas#ai-champions' },
@@ -173,12 +169,8 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2">
             {productJourneys.map((journey, journeyIndex) => (
-              <article key={journey.audience} className={`border-b border-white/15 py-10 md:px-9 ${journeyIndex === 0 ? 'md:border-r' : ''}`}>
-                <div className="flex items-center justify-between">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-lime-300">{journey.audience}</p>
-                  <span className="font-mono text-xs text-white/35">0{journeyIndex + 1}</span>
-                </div>
-                <div className="mt-16 flex items-center gap-4 text-sm text-white/45" aria-label={`${journey.products[0].title}, depois ${journey.products[1].title}`}>
+              <article key={journey.products[0].title} className={`border-b border-white/15 py-10 md:px-9 ${journeyIndex === 0 ? 'md:border-r' : ''}`}>
+                <div className="flex items-center gap-4 text-sm text-white/45" aria-label={`${journey.products[0].title}, depois ${journey.products[1].title}`}>
                   <span>{journey.products[0].title.split(' em ')[0]}</span>
                   <ArrowRight className="size-4 shrink-0 text-lime-300" aria-hidden="true" />
                   <span>{journey.products[1].title}</span>
@@ -196,10 +188,6 @@ export default function Home() {
                     </Link>
                   ))}
                 </div>
-                <Link href={journey.href} className="mt-7 inline-flex items-center gap-3 text-sm font-semibold text-white/65 underline decoration-white/25 underline-offset-4 hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]">
-                  Ver a jornada completa
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
               </article>
             ))}
           </div>
