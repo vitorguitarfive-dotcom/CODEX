@@ -11,7 +11,7 @@ const productJourneys = [
     description: 'Aprenda a aplicar IA e transforme essa capacidade em atuação profissional.',
     progression: ['Especialista', 'Consultor'],
     products: [
-      { title: 'Especialista em IA para Negócios', href: '/profissionais#especialista' },
+      { title: 'Especialista em IA para Negócios', href: '/formacoes/especialista-ia-negocios' },
       { title: 'Consultor de IA para Empresas', href: '/profissionais#consultor' },
     ],
   },

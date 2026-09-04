@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Check, Clock3, GraduationCap, Users } from 'lucide-react';
 import { ClosingCta, InnerHero, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
 import { WhatsAppButton } from '@/components/whatsapp';
@@ -73,8 +74,19 @@ export default function ProfissionaisPage() {
             >
               <div>
                 <span className="font-mono text-sm text-[#526057]">{course.number}</span>
-                <h2 className="mt-6 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[#101412] sm:text-5xl">{course.title}</h2>
+                <h2 className="mt-6 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[#101412] sm:text-5xl">
+                  {course.id === 'especialista' ? (
+                    <Link href="/formacoes/especialista-ia-negocios" className="transition-colors hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]">
+                      {course.title}
+                    </Link>
+                  ) : course.title}
+                </h2>
                 <p className="mt-6 max-w-xl text-lg leading-8 text-[#526057]">{course.promise}</p>
+                {course.id === 'especialista' && (
+                  <Link href="/formacoes/especialista-ia-negocios" className="mt-6 inline-flex border-b border-[#101412]/25 pb-1 text-sm font-semibold text-[#101412] transition-colors hover:border-[#769149] hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]">
+                    Conhecer a formação completa
+                  </Link>
+                )}
                 <div className="mt-9">
                   <WhatsAppButton
                     contextKey={course.id === 'especialista' ? 'profissionais_especialista' : 'profissionais_consultor'}

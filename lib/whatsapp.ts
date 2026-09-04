@@ -7,6 +7,7 @@ export type WhatsAppContextKey =
   | 'home_cta_final'
   | 'profissionais_hero'
   | 'profissionais_especialista'
+  | 'formacao_especialista'
   | 'profissionais_consultor'
   | 'profissionais_cta_final'
   | 'empresas_hero'
@@ -24,6 +25,7 @@ export type WhatsAppLinkExtra = {
   resultado?: string;
   pathname?: string;
   utm?: UtmData;
+  details?: string;
 };
 
 export type UtmData = {
@@ -40,6 +42,7 @@ const messages: Record<Exclude<WhatsAppContextKey, 'home_diagnostico' | 'floatin
   home_cta_final: 'Olá! Vim pelo site da Denkor e quero descobrir meu caminho com IA.',
   profissionais_hero: 'Olá! Estou na página de Profissionais da Denkor e quero saber mais.',
   profissionais_especialista: 'Olá! Quero informações sobre a Formação Especialista em IA para Negócios.',
+  formacao_especialista: 'Olá! Quero saber mais sobre a Formação Especialista em IA para Negócios.',
   profissionais_consultor: 'Olá! Quero informações sobre a Formação Consultor de IA para Empresas.',
   profissionais_cta_final: 'Olá! Quero encontrar a formação certa para mim na Denkor.',
   empresas_hero: 'Olá! Estou na página de Empresas da Denkor e quero saber mais.',
@@ -54,6 +57,7 @@ const messages: Record<Exclude<WhatsAppContextKey, 'home_diagnostico' | 'floatin
 };
 
 function floatingMessage(pathname = '/') {
+  if (pathname.startsWith('/formacoes/especialista-ia-negocios')) return messages.formacao_especialista;
   if (pathname.startsWith('/profissionais')) return messages.profissionais_hero;
   if (pathname.startsWith('/empresas')) return messages.empresas_hero;
   if (pathname.startsWith('/contato')) return messages.contato_geral;
@@ -106,6 +110,8 @@ export function buildWhatsAppLink(contextKey: WhatsAppContextKey, extra: WhatsAp
   } else {
     message = messages[contextKey];
   }
+
+  if (extra.details) message += `\n\n${extra.details}`;
 
   const utm = extra.utm ?? readStoredUtm();
   const origin = [utm.utmSource, utm.utmCampaign].filter(Boolean).join('/');

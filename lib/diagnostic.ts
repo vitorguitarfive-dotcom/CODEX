@@ -100,7 +100,7 @@ export const diagnosticResults: Record<DiagnosticResultId, DiagnosticResult> = {
     id: 'business-ai-specialist',
     title: 'Especialista em IA para Negócios',
     text: 'Seu momento indica que o caminho mais adequado é desenvolver capacidade prática para identificar oportunidades, estruturar soluções e aplicar inteligência artificial em negócios.',
-    href: '/profissionais#especialista',
+    href: '/formacoes/especialista-ia-negocios',
   },
   'ai-consultant': {
     id: 'ai-consultant',

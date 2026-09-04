@@ -75,6 +75,27 @@ html {
   }
 }
 
+@keyframes course-reveal {
+  from {
+    opacity: 0.72;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .course-reveal {
+      animation: course-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 22%;
+    }
+  }
+}
+
 .diagnostic-enter {
   animation: diagnostic-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
