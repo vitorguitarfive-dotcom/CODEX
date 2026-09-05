@@ -1,20 +1,25 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { TrafficAttribution } from '@/components/traffic-attribution';
 import { WhatsAppFloating } from '@/components/whatsapp';
 import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://denkor.com.br'),
-  title: {
-    default: 'Denkor — Intelligence for Business',
-    template: '%s — Denkor',
-  },
+  title: 'Denkor — IA aplicada a negócios',
   description:
     'Educação e transformação empresarial através da inteligência artificial.',
   openGraph: {
     title: 'Denkor — Intelligence for Business',
     description: 'IA aplicada a processos, decisões e crescimento.',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Denkor — Intelligence for Business' }],
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Denkor — Intelligence for Business',
+      },
+    ],
     locale: 'pt_BR',
     type: 'website',
   },
@@ -37,7 +42,7 @@ export default function RootLayout({
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-18427985890"
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
         />
         <Script id="google-ads-tag" strategy="beforeInteractive">
           {`
@@ -47,7 +52,7 @@ export default function RootLayout({
             gtag('config', 'AW-18427985890');
           `}
         </Script>
-        <Script id="google-tag-manager" strategy="beforeInteractive">
+        <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -67,6 +72,7 @@ export default function RootLayout({
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
+        <TrafficAttribution />
         {children}
         <WhatsAppFloating />
       </body>

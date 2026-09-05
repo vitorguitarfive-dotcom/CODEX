@@ -1,34 +1,59 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Check, Clock3, GraduationCap, Users } from 'lucide-react';
-import { ClosingCta, InnerHero, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
+import { MetodoDenkor } from '@/components/metodo-denkor';
+import {
+  ClosingCta,
+  InnerHero,
+  SectionLabel,
+  SiteFooter,
+  SiteHeader,
+} from '@/components/site-shell';
 import { WhatsAppButton } from '@/components/whatsapp';
+import { createPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Para Profissionais | Denkor',
-  description: 'Formações em inteligência artificial aplicada a negócios e consultoria empresarial.',
-};
+export const metadata: Metadata = createPageMetadata(
+  'Formações em IA para negócios — Denkor',
+  'Duas formações para aprender a aplicar IA em empresas e a vender projetos de IA.',
+);
 
 const courses = [
   {
     id: 'especialista',
     number: '01',
     title: 'Formação Especialista em IA para Negócios',
-    promise: 'Aprenda a identificar onde a IA pode gerar resultado dentro de empresas e transformar isso em agentes, automações e melhoria de processos.',
-    audience: 'Profissionais, gestores, empresários, analistas e pessoas que querem se tornar referência em IA aplicada a negócios. Não é necessário ser programador.',
+    promise:
+      'Aprenda a identificar onde a IA pode gerar resultado dentro de empresas e transformar isso em agentes, automações e melhoria de processos.',
+    audience:
+      'Profissionais, gestores, empresários, analistas e pessoas que querem se tornar referência em IA aplicada a negócios. Não é necessário ser programador.',
     duration: '32 horas — 4 sábados de 8h ou 8 encontros de 4h',
     certification: 'Certificado de conclusão Denkor e projeto aplicado',
-    learn: ['Fundamentos de IA generativa', 'Prompts e engenharia de contexto', 'Análise de processos e diagnóstico', 'Agentes e automações', 'Priorização, business case e ROI'],
+    learn: [
+      'Fundamentos de IA generativa',
+      'Prompts e engenharia de contexto',
+      'Análise de processos e diagnóstico',
+      'Agentes e automações',
+      'Priorização, business case e ROI',
+    ],
   },
   {
     id: 'consultor',
     number: '02',
     title: 'Formação Consultor de IA para Empresas',
-    promise: 'Aprenda a prospectar, diagnosticar, vender e entregar projetos de IA para empresas.',
-    audience: 'Consultores, vendedores B2B, empresários, profissionais autônomos, agências e especialistas que querem comercializar serviços de IA.',
+    promise:
+      'Aprenda a prospectar, diagnosticar, vender e entregar projetos de IA para empresas.',
+    audience:
+      'Consultores, vendedores B2B, empresários, profissionais autônomos, agências e especialistas que querem comercializar serviços de IA.',
     duration: '20 a 24 horas — sugestão de 3 sábados de 8h',
-    certification: 'Certificado de conclusão Denkor e modelos comerciais prontos',
-    learn: ['Nicho, ICP e prospecção', 'AI Discovery e diagnóstico', 'Mapa de oportunidades e ROI', 'Proposta, precificação e negociação', 'Entrega, acompanhamento e expansão'],
+    certification:
+      'Certificado de conclusão Denkor e modelos comerciais prontos',
+    learn: [
+      'Nicho, ICP e prospecção',
+      'AI Discovery e diagnóstico',
+      'Mapa de oportunidades e ROI',
+      'Proposta, precificação e negociação',
+      'Entrega, acompanhamento e expansão',
+    ],
   },
 ];
 
@@ -41,7 +66,11 @@ export default function ProfissionaisPage() {
         title="Pare de apenas usar IA. Aprenda a aplicá-la aos negócios."
         text="Desenvolva a capacidade de identificar problemas, encontrar oportunidades e construir aplicações de inteligência artificial que gerem resultados reais para empresas."
         index="01"
-        whatsapp={{ label: 'Falar sobre as formações', contextKey: 'profissionais_hero', ctaId: 'hero-profissionais' }}
+        whatsapp={{
+          label: 'Falar sobre as formações',
+          contextKey: 'profissionais_hero',
+          ctaId: 'prof-hero',
+        }}
       />
 
       <section className="bg-[#f3f0e7]">
@@ -53,14 +82,7 @@ export default function ProfissionaisPage() {
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {['Entender o negócio', 'Diagnosticar processos', 'Desenhar soluções', 'Gerar resultado'].map((step, index) => (
-              <div key={step} className="border border-[#101412]/15 bg-white p-5">
-                <span className="font-mono text-xs text-[#526057]">0{index + 1}</span>
-                <p className="mt-9 font-medium text-[#101412]">{step}</p>
-              </div>
-            ))}
-          </div>
+          <MetodoDenkor tone="light" className="mt-12" />
         </div>
       </section>
 
@@ -73,54 +95,111 @@ export default function ProfissionaisPage() {
               className={`scroll-mt-24 grid gap-12 py-14 lg:grid-cols-[.82fr_1.18fr] lg:py-24 ${courseIndex === 0 ? 'border-b border-[#101412]/15 pt-0 lg:pt-0' : ''}`}
             >
               <div>
-                <span className="font-mono text-sm text-[#526057]">{course.number}</span>
+                <span className="font-mono text-sm text-[#526057]">
+                  {course.number}
+                </span>
                 <h2 className="mt-6 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[#101412] sm:text-5xl">
                   {course.id === 'especialista' ? (
-                    <Link href="/formacoes/especialista-ia-negocios" className="transition-colors hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]">
+                    <Link
+                      href="/formacoes/especialista-ia-negocios"
+                      className="transition-colors hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]"
+                    >
                       {course.title}
                     </Link>
-                  ) : course.title}
+                  ) : (
+                    course.title
+                  )}
                 </h2>
-                <p className="mt-6 max-w-xl text-lg leading-8 text-[#526057]">{course.promise}</p>
+                <p className="mt-6 max-w-xl text-lg leading-8 text-[#526057]">
+                  {course.promise}
+                </p>
                 {course.id === 'especialista' && (
-                  <Link href="/formacoes/especialista-ia-negocios" className="mt-6 inline-flex border-b border-[#101412]/25 pb-1 text-sm font-semibold text-[#101412] transition-colors hover:border-[#769149] hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]">
+                  <Link
+                    href="/formacoes/especialista-ia-negocios"
+                    className="mt-6 inline-flex border-b border-[#101412]/25 pb-1 text-sm font-semibold text-[#101412] transition-colors hover:border-[#769149] hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]"
+                  >
                     Conhecer a formação completa
                   </Link>
                 )}
                 <div className="mt-9">
                   <WhatsAppButton
-                    contextKey={course.id === 'especialista' ? 'profissionais_especialista' : 'profissionais_consultor'}
-                    ctaId={course.id === 'especialista' ? 'programa-especialista' : 'programa-consultor'}
-                    position="programa"
+                    contextKey={
+                      course.id === 'especialista'
+                        ? 'profissionais_especialista'
+                        : 'profissionais_consultor'
+                    }
+                    ctaId={
+                      course.id === 'especialista'
+                        ? 'prof-card-especialista'
+                        : 'prof-card-consultor'
+                    }
+                    position="card"
                     className="bg-[#101412] text-white hover:bg-[#344039] focus-visible:outline-[#769149]"
                   >
                     Tirar dúvidas no WhatsApp
                   </WhatsAppButton>
+                  {course.id === 'consultor' && (
+                    <p className="mt-3 text-sm leading-6 text-[#526057]">
+                      Página completa da formação em breve.
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div className="grid gap-px bg-[#101412]/15 sm:grid-cols-2">
                 <div className="bg-[#f3f0e7] p-6 sm:col-span-2 sm:p-8">
-                  <Users className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Para quem é</h3>
-                  <p className="mt-4 max-w-2xl leading-7 text-[#344039]">{course.audience}</p>
+                  <Users
+                    className="size-6 text-[#526057]"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">
+                    Para quem é
+                  </h3>
+                  <p className="mt-4 max-w-2xl leading-7 text-[#344039]">
+                    {course.audience}
+                  </p>
                 </div>
                 <div className="bg-[#f3f0e7] p-6 sm:p-8">
-                  <Clock3 className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Duração</h3>
-                  <p className="mt-4 text-sm leading-6 text-[#344039]">{course.duration}</p>
+                  <Clock3
+                    className="size-6 text-[#526057]"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">
+                    Duração
+                  </h3>
+                  <p className="mt-4 text-sm leading-6 text-[#344039]">
+                    {course.duration}
+                  </p>
                 </div>
                 <div className="bg-[#f3f0e7] p-6 sm:p-8">
-                  <GraduationCap className="size-6 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
-                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">Certificação</h3>
-                  <p className="mt-4 text-sm leading-6 text-[#344039]">{course.certification}</p>
+                  <GraduationCap
+                    className="size-6 text-[#526057]"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#526057]">
+                    Certificação
+                  </h3>
+                  <p className="mt-4 text-sm leading-6 text-[#344039]">
+                    {course.certification}
+                  </p>
                 </div>
                 <div className="bg-[#101412] p-6 text-white sm:col-span-2 sm:p-8">
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-lime-300">O que você aprende</h3>
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-lime-300">
+                    O que você aprende
+                  </h3>
                   <div className="mt-6 grid gap-4 sm:grid-cols-2">
                     {course.learn.map((item) => (
-                      <div key={item} className="flex gap-3 text-sm text-white/65">
-                        <Check className="mt-0.5 size-4 shrink-0 text-lime-300" aria-hidden="true" />
+                      <div
+                        key={item}
+                        className="flex gap-3 text-sm text-white/65"
+                      >
+                        <Check
+                          className="mt-0.5 size-4 shrink-0 text-lime-300"
+                          aria-hidden="true"
+                        />
                         {item}
                       </div>
                     ))}
@@ -133,12 +212,16 @@ export default function ProfissionaisPage() {
       </section>
 
       <ClosingCta
-        title="Encontre a formação certa para o seu momento."
+        eyebrow="Antes de decidir"
+        title="Conte seu contexto e dizemos qual das duas formações resolve o seu caso — ou se nenhuma resolve."
         label="Encontrar minha formação no WhatsApp"
         contextKey="profissionais_cta_final"
-        ctaId="cta-final-profissionais"
+        ctaId="prof-cta-final"
       />
-      <SiteFooter contextKey="profissionais_cta_final" ctaId="footer-whatsapp-profissionais" />
+      <SiteFooter
+        contextKey="profissionais_cta_final"
+        ctaId="footer-whatsapp"
+      />
     </main>
   );
 }

@@ -12,7 +12,11 @@ const navigation = [
 
 export function Brand({ light = true }: { light?: boolean }) {
   return (
-    <Link href="/" className="group flex items-center gap-3" aria-label="Denkor — início">
+    <Link
+      href="/"
+      className="group flex items-center gap-3"
+      aria-label="Denkor — início"
+    >
       <span
         className={`grid size-9 place-items-center border text-sm font-semibold transition-colors ${
           light
@@ -22,7 +26,9 @@ export function Brand({ light = true }: { light?: boolean }) {
       >
         D
       </span>
-      <span className={`text-lg font-semibold tracking-[0.18em] ${light ? 'text-white' : 'text-[#101412]'}`}>
+      <span
+        className={`text-lg font-semibold tracking-[0.18em] ${light ? 'text-white' : 'text-[#101412]'}`}
+      >
         DENKOR
       </span>
     </Link>
@@ -35,9 +41,16 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
         <Brand />
 
-        <nav aria-label="Navegação principal" className="hidden items-center gap-8 lg:flex">
+        <nav
+          aria-label="Navegação principal"
+          className="hidden items-center gap-8 lg:flex"
+        >
           {navigation.map((item) => (
-            <Link key={item.href} href={item.href} className="text-sm text-white/65 transition-colors hover:text-white">
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm text-white/65 transition-colors hover:text-white"
+            >
               {item.label}
             </Link>
           ))}
@@ -62,7 +75,11 @@ export function SiteHeader() {
           <div className="absolute right-0 top-12 w-[min(88vw,320px)] border border-white/10 bg-[#101412] p-3 shadow-2xl">
             <nav aria-label="Navegação móvel" className="flex flex-col">
               {navigation.map((item) => (
-                <Link key={item.href} href={item.href} className="border-b border-white/10 px-3 py-4 text-sm text-white/75 last:border-0 hover:text-white">
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="border-b border-white/10 px-3 py-4 text-sm text-white/75 last:border-0 hover:text-white"
+                >
                   {item.label}
                 </Link>
               ))}
@@ -70,8 +87,8 @@ export function SiteHeader() {
             <div className="mt-3 px-3 pb-2">
               <WhatsAppButton
                 contextKey="header_falar_com_denkor"
-                ctaId="header-whatsapp-mobile"
-                position="menu-mobile"
+                ctaId="header-whatsapp"
+                position="header"
                 className="w-full text-sm"
               >
                 Falar no WhatsApp
@@ -86,7 +103,7 @@ export function SiteHeader() {
 
 export function SiteFooter({
   contextKey = 'home_cta_final',
-  ctaId = 'footer-whatsapp-home',
+  ctaId = 'footer-whatsapp',
 }: {
   contextKey?: WhatsAppContextKey;
   ctaId?: string;
@@ -97,21 +114,33 @@ export function SiteFooter({
         <div>
           <Brand />
           <p className="mt-6 max-w-md text-sm leading-6 text-white/50">
-            Educação e transformação empresarial através da inteligência artificial.
+            Educação e transformação empresarial através da inteligência
+            artificial.
           </p>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">Explore</p>
-          <nav className="mt-5 flex flex-col gap-3" aria-label="Links do rodapé">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">
+            Explore
+          </p>
+          <nav
+            className="mt-5 flex flex-col gap-3"
+            aria-label="Links do rodapé"
+          >
             {navigation.map((item) => (
-              <Link key={item.href} href={item.href} className="text-sm text-white/55 transition-colors hover:text-white">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm text-white/55 transition-colors hover:text-white"
+              >
                 {item.label}
               </Link>
             ))}
           </nav>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">Próximo passo</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">
+            Próximo passo
+          </p>
           <div className="mt-5">
             <WhatsAppButton
               contextKey={contextKey}
@@ -129,11 +158,14 @@ export function SiteFooter({
         <div className="mx-auto max-w-[1440px] px-5 py-5 sm:px-8 lg:px-12">
           <p className="text-sm text-white/65">
             Prefere e-mail? Escreva para{' '}
-            <a href="mailto:contato@denkor.com.br" className="underline decoration-white/30 underline-offset-4 focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]">
+            <a
+              href="mailto:contato@denkor.com.br"
+              className="underline decoration-white/30 underline-offset-4 focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]"
+            >
               contato@denkor.com.br
             </a>
           </p>
-          <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4 text-[11px] uppercase tracking-[0.14em] text-white/30 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4 text-[11px] uppercase tracking-[0.14em] text-white/60 sm:flex-row sm:items-center sm:justify-between">
             <span>© {new Date().getFullYear()} Denkor</span>
             <span>Intelligence for Business</span>
           </div>
@@ -143,9 +175,17 @@ export function SiteFooter({
   );
 }
 
-export function SectionLabel({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+export function SectionLabel({
+  children,
+  dark = false,
+}: {
+  children: React.ReactNode;
+  dark?: boolean;
+}) {
   return (
-    <p className={`flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-lime-300' : 'text-[#526057]'}`}>
+    <p
+      className={`flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-lime-300' : 'text-[#526057]'}`}
+    >
       <span className={`h-px w-8 ${dark ? 'bg-lime-300' : 'bg-[#526057]'}`} />
       {children}
     </p>
@@ -153,12 +193,14 @@ export function SectionLabel({ children, dark = false }: { children: React.React
 }
 
 export function ClosingCta({
+  eyebrow,
   title = 'Transforme intenção em aplicação real.',
   label = 'Conversar com a Denkor',
   contextKey = 'home_cta_final',
-  ctaId = 'cta-final-home',
+  ctaId = 'home-cta-final',
   href,
 }: {
+  eyebrow: string;
   title?: string;
   label?: string;
   contextKey?: WhatsAppContextKey;
@@ -169,7 +211,9 @@ export function ClosingCta({
     <section className="border-t border-white/10 bg-[#101412] text-white">
       <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end lg:px-12 lg:py-24">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-lime-300">Comece por onde faz sentido</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-lime-300">
+            {eyebrow}
+          </p>
           <h2 className="mt-5 max-w-4xl text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
             {title}
           </h2>
@@ -181,10 +225,17 @@ export function ClosingCta({
             className="group inline-flex min-h-14 items-center justify-between gap-8 border border-white/30 px-5 font-semibold transition-colors hover:bg-white hover:text-[#101412] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]"
           >
             {label}
-            <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            <ArrowRight
+              className="size-5 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </Link>
         ) : (
-          <WhatsAppButton contextKey={contextKey} ctaId={ctaId} position="final">
+          <WhatsAppButton
+            contextKey={contextKey}
+            ctaId={ctaId}
+            position="final"
+          >
             {label}
           </WhatsAppButton>
         )}
@@ -211,8 +262,12 @@ export function InnerHero({
       <div className="mx-auto grid max-w-[1440px] px-5 py-16 sm:px-8 lg:min-h-[620px] lg:grid-cols-[1fr_300px] lg:px-12 lg:py-24">
         <div className="flex flex-col justify-center lg:border-r lg:border-white/10 lg:pr-16">
           <SectionLabel dark>{eyebrow}</SectionLabel>
-          <h1 className="mt-8 max-w-5xl text-[2.5rem] font-semibold leading-[2.75rem] tracking-[-0.045em] lg:text-[4rem] lg:leading-[4.25rem]">{title}</h1>
-          <p className="mt-9 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">{text}</p>
+          <h1 className="mt-8 max-w-5xl text-[2.5rem] font-semibold leading-[2.75rem] tracking-[-0.045em] lg:text-[4rem] lg:leading-[4.25rem]">
+            {title}
+          </h1>
+          <p className="mt-9 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl">
+            {text}
+          </p>
           {whatsapp && (
             <div className="mt-8">
               <WhatsAppButton
@@ -226,7 +281,7 @@ export function InnerHero({
           )}
         </div>
         <div className="mt-14 flex items-end justify-between border-t border-white/10 pt-8 lg:mt-0 lg:border-t-0 lg:pl-10">
-          <p className="text-[11px] uppercase leading-5 tracking-[0.18em] text-white/35">
+          <p className="text-[11px] uppercase leading-5 tracking-[0.18em] text-white/60">
             DENKOR
             <br />
             Intelligence for Business

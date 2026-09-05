@@ -17,6 +17,7 @@ import {
 } from '@/components/course/course-sections';
 import { SiteFooter, SiteHeader } from '@/components/site-shell';
 import { courses, courseSlugs } from '@/content/formacoes';
+import { createPageMetadata } from '@/lib/metadata';
 
 type CoursePageProps = {
   params: Promise<{ slug: string }>;
@@ -26,16 +27,15 @@ export function generateStaticParams() {
   return courseSlugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CoursePageProps): Promise<Metadata> {
   const { slug } = await params;
   const course = courses[slug];
 
   if (!course) return {};
 
-  return {
-    title: course.metadata.title,
-    description: course.metadata.description,
-  };
+  return createPageMetadata(course.metadata.title, course.metadata.description);
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {
@@ -60,7 +60,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
       <CourseDetails course={course} />
       <FAQ course={course} />
       <CourseCTA course={course} />
-      <SiteFooter contextKey="formacao_especialista" ctaId="footer-whatsapp-formacao-especialista" />
+      <SiteFooter contextKey="formacao_especialista" ctaId="footer-whatsapp" />
       <MobileCourseCta />
     </main>
   );

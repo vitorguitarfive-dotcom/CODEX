@@ -1,13 +1,24 @@
 import type { UtmData, WhatsAppContextKey } from '@/lib/whatsapp';
 
+export type WhatsAppPosition =
+  | 'header'
+  | 'hero'
+  | 'card'
+  | 'meio'
+  | 'final'
+  | 'footer'
+  | 'flutuante';
+
 export type WhatsAppClickPayload = {
-  page: string;
   cta_id: string;
-  contexto: WhatsAppContextKey;
-  position: string;
-  utm_source: string;
-  utm_medium: string;
-  utm_campaign: string;
+  page: string;
+  contexto: string;
+  position: WhatsAppPosition;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
 };
 
 export type DiagnosticEventName =
@@ -19,20 +30,44 @@ export type DiagnosticEventName =
   | 'diagnostico_step'
   | 'diagnostico_complete';
 
-function dispatchAnalyticsEvent(eventName: string, data: Record<string, unknown>) {
-  if (typeof window === 'undefined') return;
-  window.dispatchEvent(new CustomEvent('denkor:analytics', { detail: { eventName, ...data } }));
-}
-
-export function trackWhatsAppClick(payload: WhatsAppClickPayload) {
-  dispatchAnalyticsEvent('whatsapp_click', payload);
-  if (payload.cta_id === 'floating-whatsapp') {
-    dispatchAnalyticsEvent('whatsapp_floating_click', payload);
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>;
   }
 }
 
-export function trackDiagnosticEvent(eventName: DiagnosticEventName, data: Record<string, unknown> = {}) {
-  dispatchAnalyticsEvent(eventName, data);
+function pushDataLayer(event: Record<string, unknown>) {
+  if (typeof window === 'undefined') return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(event);
+}
+
+function dispatchDebugEvent(eventName: string, data: Record<string, unknown>) {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(
+    new CustomEvent('denkor:analytics', { detail: { eventName, ...data } }),
+  );
+}
+
+export function trackWhatsAppClick(payload: WhatsAppClickPayload) {
+  const event = { event: 'whatsapp_click', ...payload };
+  pushDataLayer(event);
+  dispatchDebugEvent('whatsapp_click', payload);
+  if (process.env.NODE_ENV === 'development') {
+    document.documentElement.setAttribute(
+      'data-last-whatsapp-event',
+      JSON.stringify(event),
+    );
+    console.debug('[Denkor analytics]', event);
+  }
+}
+
+export function trackDiagnosticEvent(
+  eventName: DiagnosticEventName,
+  data: Record<string, unknown> = {},
+) {
+  pushDataLayer({ event: eventName, ...data });
+  dispatchDebugEvent(eventName, data);
 }
 
 export function createWhatsAppTrackingPayload({
@@ -43,7 +78,7 @@ export function createWhatsAppTrackingPayload({
 }: {
   ctaId: string;
   contextKey: WhatsAppContextKey;
-  position: string;
+  position: WhatsAppPosition;
   utm: UtmData;
 }): WhatsAppClickPayload {
   return {
@@ -54,5 +89,7 @@ export function createWhatsAppTrackingPayload({
     utm_source: utm.utmSource,
     utm_medium: utm.utmMedium,
     utm_campaign: utm.utmCampaign,
+    utm_content: utm.utmContent,
+    utm_term: utm.utmTerm,
   };
 }

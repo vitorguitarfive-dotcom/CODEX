@@ -22,12 +22,6 @@ export type LearningStage = {
   items: LearningItem[];
 };
 
-export type MethodStep = {
-  number: string;
-  title: string;
-  question: string;
-};
-
 export type ApplicationArea = {
   name: string;
   question?: string;
@@ -67,7 +61,6 @@ export type CourseContent = {
   learningStages: LearningStage[];
   method: {
     title: string;
-    steps: MethodStep[];
   };
   deliverables: {
     title: string;
@@ -101,16 +94,20 @@ export const courses: Record<string, CourseContent> = {
   'especialista-ia-negocios': {
     slug: 'especialista-ia-negocios',
     metadata: {
-      title: 'Formação Especialista em IA para Negócios',
+      title: 'Formação Especialista em IA para Negócios — Denkor',
       description:
-        'Aprenda a encontrar onde a inteligência artificial pode gerar resultado em uma empresa e transforme essa oportunidade em um projeto real.',
+        '32 horas, sem programação, com um projeto construído durante o curso.',
     },
     eyebrow: 'Formação Denkor',
     title: 'Formação Especialista em IA para Negócios',
     subtitle:
       'Aprenda a encontrar onde a inteligência artificial pode gerar resultado em uma empresa e transforme essa oportunidade em um projeto real.',
     stats: [
-      { label: '32 horas', value: '32 horas', description: 'Formação completa' },
+      {
+        label: '32 horas',
+        value: '32 horas',
+        description: 'Formação completa',
+      },
       {
         label: 'Sem programação',
         value: 'Sem programação',
@@ -129,7 +126,8 @@ export const courses: Record<string, CourseContent> = {
         'O desafio é saber onde usar IA dentro de uma empresa, qual problema resolver e como provar que a solução realmente vale a pena.',
         'Nesta formação, você aprende esse processo do começo ao fim.',
       ],
-      before: 'Tenho várias ferramentas de IA, mas não sei exatamente onde aplicar.',
+      before:
+        'Tenho várias ferramentas de IA, mas não sei exatamente onde aplicar.',
       after:
         'Consigo encontrar um problema, analisar o processo, pensar em uma solução com IA e explicar o resultado esperado.',
     },
@@ -140,15 +138,18 @@ export const courses: Record<string, CourseContent> = {
       },
       {
         title: 'Vendas e marketing',
-        description: 'Querem encontrar formas melhores de vender, atender e produzir.',
+        description:
+          'Querem encontrar formas melhores de vender, atender e produzir.',
       },
       {
         title: 'Operações e administração',
-        description: 'Querem reduzir tarefas repetitivas, retrabalho e desperdício de tempo.',
+        description:
+          'Querem reduzir tarefas repetitivas, retrabalho e desperdício de tempo.',
       },
       {
         title: 'Finanças e RH',
-        description: 'Querem encontrar aplicações reais de IA dentro dos seus processos.',
+        description:
+          'Querem encontrar aplicações reais de IA dentro dos seus processos.',
       },
       {
         title: 'Profissionais que já usam IA',
@@ -171,12 +172,14 @@ export const courses: Record<string, CourseContent> = {
           {
             number: '01',
             title: 'Entender IA, automação e agentes',
-            description: 'Você aprende a diferença entre essas tecnologias e quando usar cada uma.',
+            description:
+              'Você aprende a diferença entre essas tecnologias e quando usar cada uma.',
           },
           {
             number: '02',
             title: 'Criar instruções melhores para a IA',
-            description: 'Você aprende a dar contexto, regras e objetivos para receber respostas melhores.',
+            description:
+              'Você aprende a dar contexto, regras e objetivos para receber respostas melhores.',
           },
           {
             number: '03',
@@ -193,12 +196,14 @@ export const courses: Record<string, CourseContent> = {
           {
             number: '04',
             title: 'Entender como o trabalho acontece hoje',
-            description: 'Você escolhe um processo e identifica etapas lentas, repetitivas ou problemáticas.',
+            description:
+              'Você escolhe um processo e identifica etapas lentas, repetitivas ou problemáticas.',
           },
           {
             number: '05',
             title: 'Escolher onde vale a pena usar IA',
-            description: 'Nem todo problema precisa de IA. Você aprende a escolher as melhores oportunidades.',
+            description:
+              'Nem todo problema precisa de IA. Você aprende a escolher as melhores oportunidades.',
           },
           {
             number: '06',
@@ -215,41 +220,26 @@ export const courses: Record<string, CourseContent> = {
           {
             number: '07',
             title: 'Desenhar uma solução',
-            description: 'Você estrutura como a solução deve funcionar e cria uma primeira demonstração.',
+            description:
+              'Você estrutura como a solução deve funcionar e cria uma primeira demonstração.',
           },
           {
             number: '08',
             title: 'Entender se o projeto vale a pena',
-            description: 'Você compara tempo, custo, benefícios, riscos e resultado esperado.',
+            description:
+              'Você compara tempo, custo, benefícios, riscos e resultado esperado.',
           },
           {
             number: '09',
             title: 'Apresentar o projeto',
-            description: 'Você aprende a explicar sua ideia para gestores e pessoas que tomam decisões.',
+            description:
+              'Você aprende a explicar sua ideia para gestores e pessoas que tomam decisões.',
           },
         ],
       },
     ],
     method: {
       title: 'IA só gera valor quando existe método.',
-      steps: [
-        { number: '01', title: 'Entender o processo', question: 'Como o trabalho funciona hoje?' },
-        {
-          number: '02',
-          title: 'Encontrar a oportunidade',
-          question: 'Onde existe um problema que IA pode ajudar a resolver?',
-        },
-        {
-          number: '03',
-          title: 'Desenhar a solução',
-          question: 'Como pessoas, processos e IA vão trabalhar juntos?',
-        },
-        {
-          number: '04',
-          title: 'Medir o resultado',
-          question: 'Como saber se a mudança realmente valeu a pena?',
-        },
-      ],
     },
     deliverables: {
       title: 'Você termina a formação com algo construído.',
@@ -271,9 +261,13 @@ export const courses: Record<string, CourseContent> = {
     },
     example: {
       title: 'Na prática, pense assim:',
-      disclaimer: 'Este é um exemplo ilustrativo da lógica da formação. Não é um case real da Denkor.',
+      disclaimer:
+        'Este é um exemplo ilustrativo da lógica da formação. Não é um case real da Denkor.',
       steps: [
-        { label: 'Problema', text: 'Minha equipe perde muito tempo respondendo sempre as mesmas perguntas.' },
+        {
+          label: 'Problema',
+          text: 'Minha equipe perde muito tempo respondendo sempre as mesmas perguntas.',
+        },
         {
           label: 'Processo',
           text: 'Entender como essas perguntas chegam e como são respondidas hoje.',
@@ -291,19 +285,47 @@ export const courses: Record<string, CourseContent> = {
           text: 'Definir como medir economia de tempo, qualidade e eficiência.',
         },
       ],
-      conclusion: 'É esse tipo de raciocínio que você aprende a aplicar em diferentes áreas de uma empresa.',
+      conclusion:
+        'É esse tipo de raciocínio que você aprende a aplicar em diferentes áreas de uma empresa.',
     },
     applicationAreas: [
       { name: 'Vendas', question: 'Onde a equipe está perdendo tempo?' },
-      { name: 'Marketing', question: 'Que trabalho poderia ser organizado com mais clareza?' },
-      { name: 'Atendimento', question: 'O que poderia ser respondido ou organizado mais rápido?' },
-      { name: 'Operações', question: 'Que tarefas são repetidas todos os dias?' },
-      { name: 'Administração', question: 'Que processo poderia ser mais simples?' },
-      { name: 'Recursos Humanos', question: 'Que processos poderiam ser mais simples?' },
-      { name: 'Finanças', question: 'Onde existem tarefas manuais e repetitivas?' },
-      { name: 'Gestão', question: 'Que decisão precisa de informações mais claras?' },
-      { name: 'Projetos', question: 'Onde o trabalho perde tempo ou informação?' },
-      { name: 'Inovação', question: 'Qual problema vale a pena testar primeiro?' },
+      {
+        name: 'Marketing',
+        question: 'Que trabalho poderia ser organizado com mais clareza?',
+      },
+      {
+        name: 'Atendimento',
+        question: 'O que poderia ser respondido ou organizado mais rápido?',
+      },
+      {
+        name: 'Operações',
+        question: 'Que tarefas são repetidas todos os dias?',
+      },
+      {
+        name: 'Administração',
+        question: 'Que processo poderia ser mais simples?',
+      },
+      {
+        name: 'Recursos Humanos',
+        question: 'Que processos poderiam ser mais simples?',
+      },
+      {
+        name: 'Finanças',
+        question: 'Onde existem tarefas manuais e repetitivas?',
+      },
+      {
+        name: 'Gestão',
+        question: 'Que decisão precisa de informações mais claras?',
+      },
+      {
+        name: 'Projetos',
+        question: 'Onde o trabalho perde tempo ou informação?',
+      },
+      {
+        name: 'Inovação',
+        question: 'Qual problema vale a pena testar primeiro?',
+      },
     ],
     capabilities: [
       'Encontrar problemas que podem ser reduzidos com IA',
@@ -328,10 +350,19 @@ export const courses: Record<string, CourseContent> = {
     },
     details: [
       { label: 'Carga horária', lines: ['32 horas'] },
-      { label: 'Formato', lines: ['4 encontros de 8 horas', 'ou', '8 encontros de 4 horas'] },
-      { label: 'Metodologia', lines: ['Conteúdo aplicado + exercícios + projeto final'] },
+      {
+        label: 'Formato',
+        lines: ['4 encontros de 8 horas', 'ou', '8 encontros de 4 horas'],
+      },
+      {
+        label: 'Metodologia',
+        lines: ['Conteúdo aplicado + exercícios + projeto final'],
+      },
       { label: 'Conhecimento técnico', lines: ['Não precisa saber programar'] },
-      { label: 'Projeto', lines: ['Você desenvolve uma aplicação durante a formação'] },
+      {
+        label: 'Projeto',
+        lines: ['Você desenvolve uma aplicação durante a formação'],
+      },
     ],
     faq: [
       { question: 'Preciso saber programar?', answer: 'Não.' },
@@ -357,10 +388,12 @@ export const courses: Record<string, CourseContent> = {
       { question: 'Quanto tempo dura?', answer: '32 horas.' },
     ],
     finalCta: {
-      title: 'Pare de apenas usar IA. Aprenda a transformá-la em aplicação real.',
+      title:
+        'Pare de apenas usar IA. Aprenda a transformá-la em aplicação real.',
       subtitle:
         'Entenda problemas, encontre oportunidades, desenhe soluções e aprenda a demonstrar o impacto de um projeto de inteligência artificial.',
-      summary: 'Formação Especialista em IA para Negócios · 32 horas · aplicação prática · sem necessidade de programação',
+      summary:
+        'Formação Especialista em IA para Negócios · 32 horas · aplicação prática · sem necessidade de programação',
     },
   },
 };

@@ -1,23 +1,50 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2 } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  BriefcaseBusiness,
+  Building2,
+} from 'lucide-react';
 import { AIDiagnostic } from '@/components/ai-diagnostic';
+import { MetodoDenkor } from '@/components/metodo-denkor';
 import { InternationalPresence, ProofCases } from '@/components/proof-sections';
-import { ClosingCta, SectionLabel, SiteFooter, SiteHeader } from '@/components/site-shell';
+import {
+  ClosingCta,
+  SectionLabel,
+  SiteFooter,
+  SiteHeader,
+} from '@/components/site-shell';
 import { WhatsAppButton } from '@/components/whatsapp';
+import { createPageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = createPageMetadata(
+  'Denkor — IA aplicada a negócios',
+  'Formações para profissionais e programas para empresas aplicarem IA a processos reais.',
+);
 
 const productJourneys = [
   {
     context: 'Na minha carreira',
-    description: 'Aprenda a aplicar IA e transforme essa capacidade em atuação profissional.',
+    description:
+      'Aprenda a aplicar IA e transforme essa capacidade em atuação profissional.',
     progression: ['Especialista', 'Consultor'],
     products: [
-      { title: 'Especialista em IA para Negócios', href: '/formacoes/especialista-ia-negocios' },
-      { title: 'Consultor de IA para Empresas', href: '/profissionais#consultor' },
+      {
+        title: 'Especialista em IA para Negócios',
+        href: '/formacoes/especialista-ia-negocios',
+      },
+      {
+        title: 'Consultor de IA para Empresas',
+        href: '/profissionais#consultor',
+      },
     ],
   },
   {
     context: 'Na minha empresa',
-    description: 'Descubra onde aplicar IA e desenvolva capacidade para executar.',
+    description:
+      'Descubra onde aplicar IA e desenvolva capacidade para executar.',
     progression: ['Transformation Day', 'AI Champions'],
     products: [
       { title: 'AI Transformation Day', href: '/empresas#transformation-day' },
@@ -26,38 +53,40 @@ const productJourneys = [
   },
 ];
 
-const denkorMethod = [
-  { label: 'Identificar', description: 'Onde existe oportunidade real de aplicar IA.' },
-  { label: 'Aplicar', description: 'Transformar a oportunidade em processo ou solução.' },
-  { label: 'Medir', description: 'Entender o impacto gerado no negócio.' },
-];
-
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <SiteHeader />
 
       <section className="relative isolate bg-[#101412] text-white">
-        <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-[1440px] grid-cols-1 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,1fr)] lg:gap-12 lg:px-12">
-          <div className="flex flex-col justify-center py-16 sm:py-20 lg:justify-start lg:py-24">
+        <div className="mx-auto flex min-h-[calc(100svh-5rem)] max-w-[1440px] flex-col justify-center px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             <SectionLabel dark>Intelligence for Business</SectionLabel>
+            <span className="max-w-sm text-[11px] uppercase leading-5 tracking-[0.2em] text-white/60 sm:text-right">
+              Formações para profissionais · Programas para empresas
+            </span>
+          </div>
+          <div>
             <h1 className="mt-7 max-w-5xl text-[2.5rem] font-semibold leading-[2.75rem] tracking-[-0.045em] sm:mt-8 lg:text-[4rem] lg:leading-[4.25rem]">
-              As ferramentas de IA estão ao alcance de todos. Transformá-las em resultado exige método.
+              As ferramentas de IA estão ao alcance de todos. Transformá-las em
+              resultado exige método.
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-7 text-white/65 sm:mt-9 sm:text-xl sm:leading-8">
-              A Denkor prepara profissionais e empresas para identificar onde a inteligência artificial pode gerar valor, aplicá-la aos processos e medir seu impacto no negócio.
+              A Denkor prepara profissionais e empresas para identificar onde a
+              inteligência artificial pode gerar valor, aplicá-la aos processos
+              e medir seu impacto no negócio.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
               <WhatsAppButton
                 contextKey="home_hero_profissional"
-                ctaId="hero-profissional"
+                ctaId="home-hero-profissional"
                 position="hero"
               >
                 Quero me tornar especialista
               </WhatsAppButton>
               <WhatsAppButton
                 contextKey="home_hero_empresa"
-                ctaId="hero-empresa"
+                ctaId="home-hero-empresa"
                 position="hero"
                 variant="secondary"
                 className="border-white/30 text-white hover:bg-white hover:text-[#101412] focus-visible:outline-[#dff57a]"
@@ -65,56 +94,43 @@ export default function Home() {
                 Quero levar IA para minha empresa
               </WhatsAppButton>
             </div>
-            <Link href="#diagnostico" className="group mt-6 inline-flex max-w-max items-center gap-3 border-b border-lime-300/35 pb-2 text-sm text-white/65 transition-colors hover:border-lime-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300">
-              <span><strong className="font-semibold text-lime-300">Está em dúvida?</strong> Faça o diagnóstico de 1 minuto</span>
-              <ArrowDown className="size-4 text-lime-300 transition-transform group-hover:translate-y-1" aria-hidden="true" />
-            </Link>
-          </div>
-
-          <div className="hidden flex-col justify-start gap-5 border-t border-white/10 py-10 sm:py-12 lg:flex lg:border-t-0 lg:py-24">
-            <div className="hidden justify-end lg:flex">
-              <span className="text-right text-[11px] uppercase leading-5 tracking-[0.2em] text-white/35">
-                Educação executiva
-                <br />
-                Transformação empresarial
+            <Link
+              href="#diagnostico"
+              className="group mt-6 inline-flex max-w-max items-center gap-3 border-b border-lime-300/35 pb-2 text-sm text-white/65 transition-colors hover:border-lime-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
+            >
+              <span>
+                <strong className="font-semibold text-lime-300">
+                  Está em dúvida?
+                </strong>{' '}
+                Faça o diagnóstico de 1 minuto
               </span>
-            </div>
-            <div className="relative">
-              <div className="absolute -left-4 top-0 h-full w-px bg-lime-300" />
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">Método Denkor</p>
-              <div className="mt-7 space-y-1">
-                {denkorMethod.map((step, index) => (
-                  <div key={step.label} className="group flex items-start gap-5 border-b border-white/10 py-4 text-white/70 transition-colors hover:text-white">
-                    <span className="font-mono text-xs text-lime-300">0{index + 1}</span>
-                    <div>
-                      <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white">{step.label}</p>
-                      <p className="mt-1 text-sm leading-6">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+              <ArrowDown
+                className="size-4 text-lime-300 transition-transform group-hover:translate-y-1"
+                aria-hidden="true"
+              />
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#101412] px-5 py-12 text-white lg:hidden">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-lime-300">Método Denkor</p>
-        <div className="mt-6 border-t border-white/15">
-          {denkorMethod.map((step, index) => (
-            <div key={step.label} className="flex min-h-14 items-start gap-5 border-b border-white/15 py-4 text-sm text-white/70">
-              <span className="font-mono text-xs text-lime-300">0{index + 1}</span>
-              <div>
-                <p className="font-semibold uppercase tracking-[0.12em] text-white">{step.label}</p>
-                <p className="mt-1 leading-6">{step.description}</p>
-              </div>
-            </div>
-          ))}
+      <InternationalPresence />
+
+      <section className="bg-[#101412] text-white">
+        <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <SectionLabel dark>Método Denkor</SectionLabel>
+          <MetodoDenkor className="mt-10" stepHeadingLevel="h2" />
         </div>
       </section>
 
       <AIDiagnostic />
-      <InternationalPresence />
+
+      <section className="border-b border-[#101412]/15 bg-[#f3f0e7]">
+        <div className="mx-auto max-w-[1440px] px-5 py-8 sm:px-8 lg:px-12">
+          <p className="text-lg font-semibold tracking-[-0.02em] text-[#101412]">
+            IA começa no processo, não na ferramenta.
+          </p>
+        </div>
+      </section>
 
       <section className="bg-[#f3f0e7]">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.72fr_1.28fr] lg:px-12 lg:py-32">
@@ -127,7 +143,11 @@ export default function Home() {
             </h2>
             <div className="mt-10 grid gap-8 border-t border-[#101412]/15 pt-8 sm:grid-cols-2">
               <p className="text-base leading-7 text-[#344039]">
-                O mercado não precisa apenas de pessoas que saibam conversar com ferramentas. Precisa de profissionais capazes de analisar processos, identificar oportunidades, construir soluções e transformar inteligência artificial em produtividade, eficiência e crescimento.
+                O mercado não precisa apenas de pessoas que saibam conversar com
+                ferramentas. Precisa de profissionais capazes de analisar
+                processos, identificar oportunidades, construir soluções e
+                transformar inteligência artificial em produtividade, eficiência
+                e crescimento.
               </p>
               <p className="text-base leading-7 text-[#344039]">
                 É isso que a Denkor ensina.
@@ -140,31 +160,58 @@ export default function Home() {
       <section className="bg-white">
         <div className="mx-auto grid max-w-[1440px] lg:grid-cols-2">
           <div className="border-b border-[#101412]/15 px-5 py-16 sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:py-24">
-            <BriefcaseBusiness className="size-8 text-[#526057]" strokeWidth={1.5} aria-hidden="true" />
-            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#526057]">Para profissionais</p>
+            <BriefcaseBusiness
+              className="size-8 text-[#526057]"
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
+            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#526057]">
+              Para profissionais
+            </p>
             <h2 className="mt-5 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.045em] text-[#101412] sm:text-5xl">
               Aprenda a aplicar. Prepare-se para liderar.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[#526057]">
-              Formações para quem quer se tornar referência em IA aplicada a negócios ou construir uma operação de consultoria para empresas.
+              Formações para quem quer se tornar referência em IA aplicada a
+              negócios ou construir uma operação de consultoria para empresas.
             </p>
-            <Link href="/profissionais" className="group mt-10 inline-flex items-center gap-3 font-semibold text-[#101412]">
+            <Link
+              href="/profissionais"
+              className="group mt-10 inline-flex items-center gap-3 font-semibold text-[#101412]"
+            >
               Conhecer as formações
-              <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              <ArrowRight
+                className="size-5 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </Link>
           </div>
           <div className="bg-[#f3f0e7] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
-            <Building2 className="size-8 text-[#101412]" strokeWidth={1.5} aria-hidden="true" />
-            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#344039]">Para empresas</p>
+            <Building2
+              className="size-8 text-[#101412]"
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
+            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.2em] text-[#344039]">
+              Para empresas
+            </p>
             <h2 className="mt-5 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.045em] text-[#101412] sm:text-5xl">
               Descubra onde começar. Crie capacidade interna.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[#344039]">
-              Programas para capacitar líderes, mapear oportunidades reais e desenvolver pessoas capazes de conduzir a transformação por dentro.
+              Programas para capacitar líderes, mapear oportunidades reais e
+              desenvolver pessoas capazes de conduzir a transformação por
+              dentro.
             </p>
-            <Link href="/empresas" className="group mt-10 inline-flex items-center gap-3 font-semibold text-[#101412]">
+            <Link
+              href="/empresas"
+              className="group mt-10 inline-flex items-center gap-3 font-semibold text-[#101412]"
+            >
               Conhecer as soluções
-              <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              <ArrowRight
+                className="size-5 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </Link>
           </div>
         </div>
@@ -177,17 +224,32 @@ export default function Home() {
           <div className="border-b border-white/15 pb-12">
             <div>
               <SectionLabel dark>Produtos Denkor</SectionLabel>
-              <h2 className="mt-7 max-w-3xl text-[2rem] font-semibold leading-[2.375rem] tracking-[-0.045em] lg:text-[3rem] lg:leading-[3.375rem]">Onde você quer gerar resultado com IA?</h2>
+              <h2 className="mt-7 max-w-3xl text-[2rem] font-semibold leading-[2.375rem] tracking-[-0.045em] lg:text-[3rem] lg:leading-[3.375rem]">
+                Onde você quer gerar resultado com IA?
+              </h2>
             </div>
           </div>
           <div className="grid md:grid-cols-2">
             {productJourneys.map((journey, journeyIndex) => (
-              <article key={journey.products[0].title} className={`border-b border-white/15 py-10 md:px-9 ${journeyIndex === 0 ? 'md:border-r' : ''}`}>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">{journey.context}</p>
-                <p className="mt-4 max-w-md text-base leading-7 text-white/65">{journey.description}</p>
-                <div className="mt-7 flex items-center gap-4 text-sm text-white/45" aria-label={`${journey.progression[0]}, depois ${journey.progression[1]}`}>
+              <article
+                key={journey.products[0].title}
+                className={`border-b border-white/15 py-10 md:px-9 ${journeyIndex === 0 ? 'md:border-r' : ''}`}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">
+                  {journey.context}
+                </p>
+                <p className="mt-4 max-w-md text-base leading-7 text-white/65">
+                  {journey.description}
+                </p>
+                <div
+                  className="mt-7 flex items-center gap-4 text-sm text-white/45"
+                  aria-label={`${journey.progression[0]}, depois ${journey.progression[1]}`}
+                >
                   <span>{journey.progression[0]}</span>
-                  <ArrowRight className="size-4 shrink-0 text-lime-300" aria-hidden="true" />
+                  <ArrowRight
+                    className="size-4 shrink-0 text-lime-300"
+                    aria-hidden="true"
+                  />
                   <span>{journey.progression[1]}</span>
                 </div>
                 <div className="mt-7 border-t border-white/15">
@@ -197,9 +259,16 @@ export default function Home() {
                       href={product.href}
                       className="group flex min-h-24 items-center gap-5 border-b border-white/15 py-5 text-white/75 transition-colors hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-[-3px] focus-visible:outline-[#dff57a]"
                     >
-                      <span className="font-mono text-xs text-lime-300">0{productIndex + 1}</span>
-                      <span className="text-lg font-semibold">{product.title}</span>
-                      <ArrowUpRight className="ml-auto size-5 shrink-0 text-white/35 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-lime-300" aria-hidden="true" />
+                      <span className="font-mono text-xs text-lime-300">
+                        0{productIndex + 1}
+                      </span>
+                      <span className="text-lg font-semibold">
+                        {product.title}
+                      </span>
+                      <ArrowUpRight
+                        className="ml-auto size-5 shrink-0 text-white/35 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-lime-300"
+                        aria-hidden="true"
+                      />
                     </Link>
                   ))}
                 </div>
@@ -209,35 +278,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#f3f0e7]">
-        <div className="mx-auto grid max-w-[1440px] px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1fr] lg:px-12 lg:py-28">
-          <div className="relative min-h-[440px] overflow-hidden bg-[#344039]">
-            <img src="/team-meeting.jpg" alt="Líder e equipe analisando resultados em um ambiente corporativo" className="absolute inset-0 h-full w-full object-cover opacity-75 mix-blend-luminosity" loading="lazy" />
-            <div className="absolute inset-0 bg-[#101412]/35" />
-            <span className="absolute bottom-5 left-5 text-[10px] uppercase tracking-[0.16em] text-white/50">Foto: Pavel Danilyuk / Pexels</span>
-          </div>
-          <div className="flex flex-col justify-center bg-white p-7 sm:p-12 lg:p-16">
-            <SectionLabel>Por que a Denkor</SectionLabel>
-            <h2 className="mt-7 text-4xl font-semibold leading-tight tracking-[-0.045em] text-[#101412] sm:text-5xl">IA começa no processo, não na ferramenta.</h2>
-            <div className="mt-9 space-y-5">
-              {denkorMethod.map((step, index) => (
-                <div key={step.label} className="flex gap-4 border-b border-[#101412]/12 pb-5 text-sm text-[#344039]">
-                  <span className="font-mono text-xs text-[#769149]">0{index + 1}</span>
-                  <div>
-                    <p className="font-semibold uppercase tracking-[0.12em] text-[#101412]">{step.label}</p>
-                    <p className="mt-1 leading-6">{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <ClosingCta
-        title="Descubra qual caminho faz sentido para você."
+        eyebrow="Não sabe por onde começar"
+        title="Três perguntas, um minuto, e você sabe qual programa serve para o seu caso."
         label="Descobrir meu caminho"
-        ctaId="cta-final-home"
+        ctaId="home-cta-final"
         href="#diagnostico"
       />
       <SiteFooter />
