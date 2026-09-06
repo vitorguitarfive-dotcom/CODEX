@@ -141,13 +141,27 @@ export function WhatsAppFloating() {
     const updateVisibility = () => {
       const availableScroll =
         document.documentElement.scrollHeight - window.innerHeight;
+      const exclusionIsVisible = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '[data-floating-cta-exclusion]',
+        ),
+      ).some((element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      });
       setVisible(
-        availableScroll > 0 && window.scrollY / availableScroll >= 0.25,
+        availableScroll > 0 &&
+          window.scrollY / availableScroll >= 0.25 &&
+          !exclusionIsVisible,
       );
     };
     updateVisibility();
     window.addEventListener('scroll', updateVisibility, { passive: true });
-    return () => window.removeEventListener('scroll', updateVisibility);
+    window.addEventListener('resize', updateVisibility);
+    return () => {
+      window.removeEventListener('scroll', updateVisibility);
+      window.removeEventListener('resize', updateVisibility);
+    };
   }, [pathname]);
 
   const href = buildWhatsAppLink('floating_button', { pathname, utm });

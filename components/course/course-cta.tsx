@@ -10,12 +10,15 @@ export function MobileCourseCta() {
 
   useEffect(() => {
     const update = () => {
-      const finalCta = document.querySelector('[data-course-final-cta]');
-      const rect = finalCta?.getBoundingClientRect();
-      const finalCtaIsVisible = Boolean(
-        rect && rect.top < window.innerHeight && rect.bottom > 0,
-      );
-      setVisible(window.scrollY > 420 && !finalCtaIsVisible);
+      const exclusionIsVisible = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '[data-course-mobile-cta-exclusion]',
+        ),
+      ).some((element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      });
+      setVisible(window.scrollY > 420 && !exclusionIsVisible);
     };
 
     update();
@@ -46,7 +49,12 @@ export function MobileCourseCta() {
 
 export function CourseCTA({ course }: { course: CourseContent }) {
   return (
-    <section data-course-final-cta className="bg-[#101412] text-white">
+    <section
+      data-course-final-cta
+      data-course-mobile-cta-exclusion
+      data-floating-cta-exclusion
+      className="bg-[#101412] text-white"
+    >
       <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="max-w-4xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-lime-300">

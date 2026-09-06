@@ -1,6 +1,16 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
+
+@source './';
+@source '../components/ai-diagnostic.tsx';
+@source '../components/metodo-denkor.tsx';
+@source '../components/proof-sections.tsx';
+@source '../components/site-shell.tsx';
+@source '../components/traffic-attribution.tsx';
+@source '../components/whatsapp.tsx';
+@source '../components/course';
+@source '../components/ui/accordion.tsx';
 
 @custom-variant dark (&:is(.dark *));
 

@@ -14,6 +14,7 @@ export function Brand({ light = true }: { light?: boolean }) {
   return (
     <Link
       href="/"
+      prefetch={false}
       className="group flex items-center gap-3"
       aria-label="Denkor — início"
     >
@@ -49,6 +50,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={false}
               className="text-sm text-white/65 transition-colors hover:text-white"
             >
               {item.label}
@@ -78,6 +80,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={false}
                   className="border-b border-white/10 px-3 py-4 text-sm text-white/75 last:border-0 hover:text-white"
                 >
                   {item.label}
@@ -130,6 +133,7 @@ export function SiteFooter({
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={false}
                 className="text-sm text-white/55 transition-colors hover:text-white"
               >
                 {item.label}
@@ -208,7 +212,10 @@ export function ClosingCta({
   href?: string;
 }) {
   return (
-    <section className="border-t border-white/10 bg-[#101412] text-white">
+    <section
+      data-floating-cta-exclusion
+      className="border-t border-white/10 bg-[#101412] text-white"
+    >
       <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end lg:px-12 lg:py-24">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-lime-300">
@@ -221,6 +228,7 @@ export function ClosingCta({
         {href ? (
           <Link
             href={href}
+            prefetch={false}
             id={ctaId}
             className="group inline-flex min-h-14 items-center justify-between gap-8 border border-white/30 px-5 font-semibold transition-colors hover:bg-white hover:text-[#101412] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]"
           >

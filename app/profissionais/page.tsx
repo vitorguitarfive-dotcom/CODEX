@@ -102,6 +102,7 @@ export default function ProfissionaisPage() {
                   {course.id === 'especialista' ? (
                     <Link
                       href="/formacoes/especialista-ia-negocios"
+                      prefetch={false}
                       className="transition-colors hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]"
                     >
                       {course.title}
@@ -116,6 +117,7 @@ export default function ProfissionaisPage() {
                 {course.id === 'especialista' && (
                   <Link
                     href="/formacoes/especialista-ia-negocios"
+                    prefetch={false}
                     className="mt-6 inline-flex border-b border-[#101412]/25 pb-1 text-sm font-semibold text-[#101412] transition-colors hover:border-[#769149] hover:text-[#526057] focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149]"
                   >
                     Conhecer a formação completa

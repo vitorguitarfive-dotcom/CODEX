@@ -96,6 +96,7 @@ export default function Home() {
             </div>
             <Link
               href="#diagnostico"
+              prefetch={false}
               className="group mt-6 inline-flex max-w-max items-center gap-3 border-b border-lime-300/35 pb-2 text-sm text-white/65 transition-colors hover:border-lime-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
             >
               <span>
@@ -177,6 +178,7 @@ export default function Home() {
             </p>
             <Link
               href="/profissionais"
+              prefetch={false}
               className="group mt-10 inline-flex items-center gap-3 font-semibold text-[#101412]"
             >
               Conhecer as formações
@@ -205,6 +207,7 @@ export default function Home() {
             </p>
             <Link
               href="/empresas"
+              prefetch={false}
               className="group mt-10 inline-flex items-center gap-3 font-semibold text-[#101412]"
             >
               Conhecer as soluções
@@ -257,6 +260,7 @@ export default function Home() {
                     <Link
                       key={product.title}
                       href={product.href}
+                      prefetch={false}
                       className="group flex min-h-24 items-center gap-5 border-b border-white/15 py-5 text-white/75 transition-colors hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-[-3px] focus-visible:outline-[#dff57a]"
                     >
                       <span className="font-mono text-xs text-lime-300">

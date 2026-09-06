@@ -9,7 +9,6 @@ import {
   Target,
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { WhatsAppButton } from '@/components/whatsapp';
 import {
   diagnosticQuestions,
@@ -76,7 +75,11 @@ function DiagnosticStart({
             </p>
           </div>
           <div>
-            <h2 className="max-w-5xl text-[clamp(2.45rem,10vw,5rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-[#101412]">
+            <h2
+              tabIndex={-1}
+              data-diagnostic-focus
+              className="max-w-5xl text-[clamp(2.45rem,10vw,5rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-[#101412] outline-none"
+            >
               Onde a inteligência artificial pode gerar resultado real?
             </h2>
             <p className="mt-6 max-w-2xl text-base leading-7 text-[#526057] sm:mt-7 sm:text-lg sm:leading-8">
@@ -95,12 +98,13 @@ function DiagnosticStart({
 
         <div className="mt-5 grid border-y border-[#101412]/15 bg-white/35 lg:grid-cols-2">
           {profileChoices.map((choice, index) => (
-            <Button
+            <button
               key={choice.id}
               type="button"
-              variant="ghost"
+              aria-labelledby={`diagnostic-profile-${choice.id}-title`}
+              aria-describedby={`diagnostic-profile-${choice.id}-description`}
               onClick={() => onSelect(choice.id)}
-              className={`group relative h-auto min-h-[190px] w-full flex-col items-start justify-between rounded-none px-5 py-6 text-left whitespace-normal hover:bg-white focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-[#769149] sm:min-h-[220px] sm:px-8 sm:py-8 lg:min-h-[260px] lg:py-10 ${
+              className={`group relative flex h-auto min-h-[190px] w-full cursor-pointer flex-col items-start justify-between rounded-none px-5 py-6 text-left whitespace-normal hover:bg-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#769149] sm:min-h-[220px] sm:px-8 sm:py-8 lg:min-h-[260px] lg:py-10 ${
                 index === 0
                   ? 'border-b border-[#101412]/15 lg:border-r lg:border-b-0'
                   : ''
@@ -113,21 +117,27 @@ function DiagnosticStart({
                 <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#526057]">
                   Começar
                   <ArrowUpRight
-                    className="size-4 transition-transform duration-300 group-hover/button:-translate-y-1 group-hover/button:translate-x-1"
+                    className="size-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
                     aria-hidden="true"
                   />
                 </span>
               </div>
               <div className="mt-10 max-w-lg sm:mt-14">
-                <span className="text-sm font-semibold uppercase tracking-[0.17em] text-[#101412]">
+                <span
+                  id={`diagnostic-profile-${choice.id}-title`}
+                  className="text-sm font-semibold uppercase tracking-[0.17em] text-[#101412]"
+                >
                   {choice.title}
                 </span>
-                <p className="mt-3 text-[15px] leading-6 font-normal text-[#526057] sm:mt-4 sm:text-base sm:leading-7">
+                <p
+                  id={`diagnostic-profile-${choice.id}-description`}
+                  className="mt-3 text-[15px] leading-6 font-normal text-[#526057] sm:mt-4 sm:text-base sm:leading-7"
+                >
                   {choice.text}
                 </p>
               </div>
-              <span className="absolute bottom-0 left-0 h-1 w-0 bg-[#769149] transition-[width] duration-300 group-hover/button:w-full group-focus-visible/button:w-full" />
-            </Button>
+              <span className="absolute bottom-0 left-0 h-1 w-0 bg-[#769149] transition-[width] duration-300 group-hover:w-full group-focus-visible:w-full" />
+            </button>
           ))}
         </div>
       </div>
@@ -197,15 +207,14 @@ function DiagnosticQuestionView({
         </div>
         <div className="mt-6 flex items-center justify-between gap-5 lg:mt-10 lg:block">
           <DiagnosticProgress current={step + 1} total={questions.length} />
-          <Button
+          <button
             type="button"
-            variant="ghost"
             onClick={onBack}
-            className="h-auto rounded-none px-0 py-2 text-sm text-white/60 hover:bg-transparent hover:text-white focus-visible:ring-lime-300/70 lg:mt-8"
+            className="inline-flex h-auto cursor-pointer items-center gap-2 rounded-none px-0 py-2 text-sm text-white/60 hover:bg-transparent hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a] lg:mt-8"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
             Voltar
-          </Button>
+          </button>
         </div>
       </aside>
 
@@ -217,6 +226,7 @@ function DiagnosticQuestionView({
           id={`diagnostic-question-${profile}-${step}`}
           ref={headingRef}
           tabIndex={-1}
+          data-diagnostic-focus
           className="mt-5 max-w-4xl text-[clamp(1.95rem,8.5vw,4.8rem)] font-semibold leading-[1] tracking-[-0.05em] text-white outline-none sm:mt-6"
         >
           {question.prompt}
@@ -292,7 +302,11 @@ function DiagnosticResultView({
 
       <div className="pt-8 lg:pt-0">
         <p className="font-mono text-xs text-lime-300">RECOMENDAÇÃO DENKOR</p>
-        <h3 className="mt-5 max-w-4xl text-[clamp(2.35rem,10vw,6.3rem)] font-semibold leading-[0.92] tracking-[-0.06em] text-white sm:mt-6">
+        <h3
+          tabIndex={-1}
+          data-diagnostic-focus
+          className="mt-5 max-w-4xl text-[clamp(2.35rem,10vw,6.3rem)] font-semibold leading-[0.92] tracking-[-0.06em] text-white outline-none sm:mt-6"
+        >
           {result.title}
         </h3>
         <p className="mt-6 max-w-3xl text-base leading-7 text-white/60 sm:mt-8 sm:text-lg sm:leading-8">
@@ -331,19 +345,19 @@ function DiagnosticResultView({
           </WhatsAppButton>
           <Link
             href={result.href}
+            prefetch={false}
             className="text-sm text-white/65 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]"
           >
             Ver a página do programa
           </Link>
-          <Button
+          <button
             type="button"
-            variant="ghost"
             onClick={onRestart}
-            className="h-auto rounded-none px-0 py-2 text-sm text-white/60 hover:bg-transparent hover:text-white focus-visible:ring-lime-300/70"
+            className="inline-flex h-auto cursor-pointer items-center gap-2 rounded-none px-0 py-2 text-sm text-white/60 hover:bg-transparent hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#dff57a]"
           >
             <RotateCcw className="size-4" aria-hidden="true" />
             Refazer diagnóstico
-          </Button>
+          </button>
         </div>
       </div>
     </div>
@@ -359,6 +373,7 @@ export function AIDiagnostic() {
   const [resultId, setResultId] = useState<DiagnosticResultId | null>(null);
   const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
+  const hasInteractedRef = useRef(false);
 
   const questions = useMemo(
     () => (profile ? diagnosticQuestions[profile] : []),
@@ -372,7 +387,7 @@ export function AIDiagnostic() {
   }, []);
 
   useEffect(() => {
-    if (view === 'start' || !experienceRef.current) return;
+    if (!hasInteractedRef.current || !experienceRef.current) return;
 
     experienceRef.current.scrollIntoView({
       block: 'start',
@@ -380,9 +395,16 @@ export function AIDiagnostic() {
         ? 'auto'
         : 'smooth',
     });
+
+    window.requestAnimationFrame(() => {
+      experienceRef.current
+        ?.querySelector<HTMLElement>('[data-diagnostic-focus]')
+        ?.focus({ preventScroll: true });
+    });
   }, [step, view]);
 
   const selectProfile = (selectedProfile: DiagnosticProfile) => {
+    hasInteractedRef.current = true;
     setProfile(selectedProfile);
     setStep(0);
     setAnswers({});
@@ -441,6 +463,7 @@ export function AIDiagnostic() {
     if (!profile || selectedOption) return;
 
     if (step === 0) {
+      hasInteractedRef.current = true;
       setView('start');
       setProfile(null);
       setAnswers({});
@@ -455,6 +478,7 @@ export function AIDiagnostic() {
   };
 
   const restart = () => {
+    hasInteractedRef.current = true;
     setView('start');
     setProfile(null);
     setStep(0);
@@ -466,6 +490,7 @@ export function AIDiagnostic() {
   return (
     <section
       id="diagnostico"
+      data-floating-cta-exclusion
       className={`scroll-mt-0 transition-colors duration-300 ${view === 'start' ? 'bg-[#f3f0e7] text-[#101412]' : 'bg-[#101412] text-white'}`}
     >
       <div

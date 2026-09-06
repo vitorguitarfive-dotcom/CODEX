@@ -464,7 +464,11 @@ export function CourseDetails({ course }: { course: CourseContent }) {
 
 export function FAQ({ course }: { course: CourseContent }) {
   return (
-    <section className="bg-[#f3f0e7]">
+    <section
+      data-course-mobile-cta-exclusion
+      data-floating-cta-exclusion
+      className="bg-[#f3f0e7]"
+    >
       <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[.55fr_1.45fr] lg:gap-16 lg:px-12 lg:py-28">
         <div>
           <SectionLabel>Perguntas frequentes</SectionLabel>
